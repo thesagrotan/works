@@ -514,7 +514,11 @@
     margin-bottom: calc(var(--spacing) * 20);
   }
 
-  .mb-32 {
+  .mb-24 {
+    margin-bottom: calc(var(--spacing) * 24);
+  }
+
+    .mb-32 {
     margin-bottom: calc(var(--spacing) * 32);
   }
 
@@ -725,6 +729,11 @@
     max-width: 458px;
   }
 
+    .max-w-\[480px\] {
+    max-width: 480px;
+  }
+
+
   .max-w-\[1200px\] {
     max-width: 1200px;
   }
@@ -827,6 +836,10 @@
 
   .gap-\[40px\] {
     gap: 40px;
+  }
+
+  .gap-\[48px\] {
+    gap: 48px;
   }
 
   .gap-\[56px\] {

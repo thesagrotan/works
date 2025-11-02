@@ -98,7 +98,7 @@ function Frame1000006068() {
 
 function Frame1000006069() {
   return (
-    <div className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 w-full">
+    <div className="content-stretch flex flex-col gap-[72px] items-start relative shrink-0 w-full">
       <Frame1000006068 />
     </div>
   );

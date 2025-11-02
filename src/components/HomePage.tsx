@@ -1,10 +1,11 @@
-import { motion } from 'motion/react';
+import { motion, LayoutGroup } from 'motion/react';
 import svgPaths from '../imports/svg-hero-paths';
 import imgAttachment from "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png";
 import imgAttachment1 from "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png";
 import imgAttachment2 from "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png";
 import { imgGroup14 } from "../imports/svg-logo-paths";
 import InfiniteCarousel from './InfiniteCarousel';
+import { useAnimationControls } from './AnimationControls';
 
 interface HomePageProps {
   onProjectClick: (projectId: string) => void;
@@ -59,7 +60,7 @@ function ConcentricCircles() {
 
 function BrandLogo() {
   return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
+    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 max-w-[424px] w-full">
       <ConcentricCircles />
       <LogoCirclesOverlay />
     </div>
@@ -67,7 +68,7 @@ function BrandLogo() {
 }
 
 // Portfolio project card component with image preview
-function PortfolioProjectCard({ id, title, onClick }: { id: string; title: string; onClick: (id: string) => void }) {
+function PortfolioProjectCard({ id, title, onClick, hoverScale, hoverDuration }: { id: string; title: string; onClick: (id: string) => void; hoverScale: number; hoverDuration: number }) {
   return (
     <button onClick={() => onClick(id)} className="block group w-full text-left cursor-pointer">
       <div className="content-stretch flex gap-[64px] items-end relative shrink-0 w-full">
@@ -102,7 +103,9 @@ function PortfolioProjectCard({ id, title, onClick }: { id: string; title: strin
         <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
           <motion.div 
             layoutId={`${id}-img-1`}
-            className="[grid-area:1_/_1] bg-stone-50 h-[178px] ml-[48px] mt-0 relative rounded-[8px] w-[285px] group-hover:scale-105 transition-transform duration-300"
+            className="[grid-area:1_/_1] bg-stone-50 h-[178px] ml-[48px] mt-0 relative rounded-[8px] w-[285px]"
+            whileHover={{ scale: hoverScale }}
+            transition={{ duration: hoverDuration }}
           >
             <div className="content-stretch flex flex-col h-[178px] items-start overflow-clip relative rounded-[inherit] w-[285px]">
               <div className="aspect-[104/67.4783] relative shrink-0 w-full">
@@ -115,7 +118,9 @@ function PortfolioProjectCard({ id, title, onClick }: { id: string; title: strin
           </motion.div>
           <motion.div 
             layoutId={`${id}-img-2`}
-            className="[grid-area:1_/_1] bg-stone-50 h-[178px] ml-[24px] mt-[29px] relative rounded-[8px] w-[285px] group-hover:scale-105 transition-transform duration-300"
+            className="[grid-area:1_/_1] bg-stone-50 h-[178px] ml-[24px] mt-[29px] relative rounded-[8px] w-[285px]"
+            whileHover={{ scale: hoverScale }}
+            transition={{ duration: hoverDuration }}
           >
             <div className="content-stretch flex flex-col h-[178px] items-start overflow-clip relative rounded-[inherit] w-[285px]">
               <div className="aspect-[141.794/92] relative shrink-0 w-full">
@@ -128,7 +133,9 @@ function PortfolioProjectCard({ id, title, onClick }: { id: string; title: strin
           </motion.div>
           <motion.div 
             layoutId={`${id}-img-3`}
-            className="[grid-area:1_/_1] bg-stone-50 h-[178px] ml-0 mt-[57px] relative rounded-[8px] w-[285px] group-hover:scale-105 transition-transform duration-300"
+            className="[grid-area:1_/_1] bg-stone-50 h-[178px] ml-0 mt-[57px] relative rounded-[8px] w-[285px]"
+            whileHover={{ scale: hoverScale }}
+            transition={{ duration: hoverDuration }}
           >
             <div className="content-stretch flex flex-col h-[178px] items-start overflow-clip relative rounded-[inherit] w-[285px]">
               <div className="aspect-[162/105.11] relative shrink-0 w-full">
@@ -146,15 +153,18 @@ function PortfolioProjectCard({ id, title, onClick }: { id: string; title: strin
 }
 
 export default function HomePage({ onProjectClick }: HomePageProps) {
+  const { cardHoverScale, cardHoverDuration, buttonHoverScale, buttonHoverDuration } = useAnimationControls();
+  
   return (
-    <div className="bg-[#edefeb] min-h-screen w-full overflow-x-hidden">
+    <LayoutGroup>
+      <div className="bg-[#edefeb] min-h-screen w-full overflow-x-hidden">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-16">
         {/* Hero Section */}
-        <div className="flex flex-col items-center gap-16 mb-32">
+        <div className="flex flex-col items-center gap-16 mb-24">
           <BrandLogo />
           
           <div className="max-w-[424px] w-full">
-            <div className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 w-full">
+            <div className="content-stretch flex flex-col gap-[48px] items-start relative shrink-0 w-full">
               <div className="content-stretch flex flex-col gap-[32px] items-start leading-none not-italic relative shrink-0 text-primary text-xs tracking-sm w-full">
                 <p className="text-hero relative shrink-0 md:text-xl w-full">
                   <span>{`I'm Daniel Campagne, `}</span>
@@ -164,18 +174,24 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                   <span className="font-semibold not-italic">With over 15 years of experience</span> <span className="font-regular not-italic">{`for the last years helping startups on b2b and b2c solutions  in the areas fo mobility, fintech, DeFi, and digital health.`}</span>
                 </p>
               </div>
-              <div className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[14px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer hover:bg-stone-700 transition-colors">
+              <motion.div 
+                className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[14px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer"
+                whileHover={{ scale: buttonHoverScale, backgroundColor: '#44403c' }}
+                transition={{ duration: buttonHoverDuration }}
+              >
                 <div className="flex flex-col justify-center leading-none relative shrink-0 text-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
                   <p className="text-button whitespace-pre">Chat with me</p>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
 
         {/* Infinite Carousel */}
-        <div className="mb-32 -mx-4 md:-mx-8 lg:-mx-16">
-          <InfiniteCarousel />
+        <div className="mb-32 -mx-4 md:-mx-8 lg:-mx-16 flex justify-center">
+          <div className="max-w-[458px] w-full">
+            <InfiniteCarousel />
+          </div>
         </div>
 
         {/* Selected Work */}
@@ -183,8 +199,8 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
           <div className="content-stretch flex flex-col items-center gap-[40px] items-start relative shrink-0 max-w-[424px] w-full mb-20">
             <p className="text-heading not-italic relative shrink-0 md:text-xl w-full">Selected Work</p>
             <div className="content-stretch flex flex-col gap-[56px] items-start relative shrink-0 w-full">
-              <PortfolioProjectCard id="credcore" title="CredCore" onClick={onProjectClick} />
-              <PortfolioProjectCard id="credcore-2" title="CredCore" onClick={onProjectClick} />
+              <PortfolioProjectCard id="credcore" title="CredCore" onClick={onProjectClick} hoverScale={cardHoverScale} hoverDuration={cardHoverDuration} />
+              <PortfolioProjectCard id="credcore-2" title="CredCore" onClick={onProjectClick} hoverScale={cardHoverScale} hoverDuration={cardHoverDuration} />
             </div>
           </div>
 
@@ -267,14 +283,19 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
               <p className="text-heading relative shrink-0 md:text-xl w-full">About me</p>
               <p className="text-heading-lg relative shrink-0 w-full">I approach projects from a tactical standpoint and make decisions based on my intuition</p>
             </div>
-            <div className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[14px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer hover:bg-stone-700 transition-colors">
+            <motion.div 
+              className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[14px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer"
+              whileHover={{ scale: buttonHoverScale, backgroundColor: '#44403c' }}
+              transition={{ duration: buttonHoverDuration }}
+            >
               <div className="flex flex-col justify-center leading-none relative shrink-0 text-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
                 <p className="text-button whitespace-pre">Chat with me</p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
     </div>
+    </LayoutGroup>
   );
 }

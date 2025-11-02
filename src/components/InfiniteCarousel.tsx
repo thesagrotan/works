@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import svgPaths from '../imports/svg-carousel-icon-paths';
+import { useAnimationControls } from './AnimationControls';
 
 function Group1000004903() {
   return (
@@ -311,23 +312,30 @@ function TechnologyIconsRow() {
 }
 
 export default function InfiniteCarousel() {
+  const { carouselEnabled, carouselDuration } = useAnimationControls();
+  
+  // Each icon is 48px + 8px gap = 56px
+  // 15 icons per row = 840px per row
+  const rowWidth = 840;
+  
   return (
-    <div className="relative w-full h-[48px] overflow-hidden">
+    <div className="relative h-[48px] overflow-hidden max-w-[480px] w-full">
       <motion.div
         className="flex gap-[8px] absolute"
-        animate={{
-          x: [0, -804],
+        animate={carouselEnabled ? {
+          x: [0, -rowWidth],
+        } : {
+          x: 0,
         }}
         transition={{
           x: {
             repeat: Infinity,
             repeatType: "loop",
-            duration: 20,
+            duration: carouselDuration,
             ease: "linear",
           },
         }}
       >
-        <TechnologyIconsRow />
         <TechnologyIconsRow />
         <TechnologyIconsRow />
         <TechnologyIconsRow />

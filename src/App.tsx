@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Leva } from 'leva';
 import HomePage from './components/HomePage';
 import ProjectModal from './components/ProjectModal';
 
@@ -7,6 +8,7 @@ export default function App() {
 
   return (
     <>
+      <Leva collapsed={false} />
       <HomePage onProjectClick={setSelectedProject} />
       {selectedProject && (
         <ProjectModal 

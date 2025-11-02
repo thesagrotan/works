@@ -5,6 +5,7 @@ import svgPaths from '../imports/svg-navigation-paths';
 import imgAttachment from "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png";
 import imgAttachment1 from "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png";
 import imgAttachment2 from "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png";
+import { useAnimationControls } from './AnimationControls';
 
 interface ProjectModalProps {
   projectId: string;
@@ -12,6 +13,18 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ projectId, onClose }: ProjectModalProps) {
+  const { 
+    backdropFadeDuration, 
+    backdropOpacity,
+    modalDamping,
+    modalStiffness,
+    layoutDuration,
+    layoutType,
+    layoutDamping,
+    layoutStiffness,
+    iconButtonDuration,
+    closeButtonScale
+  } = useAnimationControls();
   // Prevent body scroll when modal is open
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -33,10 +46,11 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: backdropOpacity }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        className="fixed inset-0 bg-black/40 z-40 backdrop-blur-sm"
+        transition={{ duration: backdropFadeDuration }}
+        className="fixed inset-0 bg-black z-40 backdrop-blur-sm"
+        style={{ backgroundColor: `rgba(0, 0, 0, ${backdropOpacity})` }}
         onClick={onClose}
       />
       
@@ -44,24 +58,41 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
         initial={{ y: '100%' }}
         animate={{ y: 0 }}
         exit={{ y: '100%' }}
-        transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+        transition={{ type: 'spring', damping: modalDamping, stiffness: modalStiffness }}
         className="fixed inset-0 z-50 overflow-y-auto"
       >
         <div className="bg-[#edefeb] min-h-screen w-full">
           <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-16">
             {/* Back button and Chat button */}
             <div className="flex justify-between items-center mb-16">
-              <button onClick={onClose} className="flex items-center gap-2 group">
+              <motion.button 
+                onClick={onClose} 
+                className="flex items-center gap-2 group"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: iconButtonDuration }}
+              >
                 <div className="h-[15px] w-[64px]">
-                  <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 65 15">
-                    <path d={svgPaths.p34105200} fill="black" className="group-hover:fill-stone-600 transition-colors" />
-                  </svg>
+                  <motion.svg 
+                    className="block size-full" 
+                    fill="none" 
+                    preserveAspectRatio="none" 
+                    viewBox="0 0 65 15"
+                    whileHover={{ fill: '#57534e' }}
+                    transition={{ duration: iconButtonDuration }}
+                  >
+                    <path d={svgPaths.p34105200} fill="black" />
+                  </motion.svg>
                 </div>
-              </button>
+              </motion.button>
               
-              <button onClick={onClose} className="p-2 hover:bg-stone-200 rounded-full transition-colors">
+              <motion.button 
+                onClick={onClose} 
+                className="p-2 rounded-full"
+                whileHover={{ scale: closeButtonScale, backgroundColor: '#e7e5e4' }}
+                transition={{ duration: iconButtonDuration }}
+              >
                 <X className="w-6 h-6 text-stone-800" />
-              </button>
+              </motion.button>
             </div>
 
             {/* Project Info and Description */}
@@ -107,6 +138,11 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
             <div className="content-start flex flex-wrap gap-10 items-start relative shrink-0 w-full">
               <motion.div 
                 layoutId={`${projectId}-img-3`}
+                transition={
+                  layoutType === 'spring' 
+                    ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
+                    : { duration: layoutDuration }
+                }
                 className="bg-stone-50 h-auto relative rounded-[8px] shrink-0 w-full lg:w-[calc(60%-20px)]"
               >
                 <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[inherit] w-full">
@@ -121,6 +157,11 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
               
               <motion.div 
                 layoutId={`${projectId}-img-2`}
+                transition={
+                  layoutType === 'spring' 
+                    ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
+                    : { duration: layoutDuration }
+                }
                 className="bg-stone-50 h-auto relative rounded-[8px] shrink-0 w-full lg:w-[calc(40%-20px)]"
               >
                 <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[inherit] w-full">
@@ -135,6 +176,11 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
               
               <motion.div 
                 layoutId={`${projectId}-img-1`}
+                transition={
+                  layoutType === 'spring' 
+                    ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
+                    : { duration: layoutDuration }
+                }
                 className="bg-stone-50 h-auto relative rounded-[8px] shrink-0 w-full"
               >
                 <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[inherit] w-full">

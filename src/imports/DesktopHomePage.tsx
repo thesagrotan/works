@@ -375,9 +375,8 @@ function Group13() {
 
 function Group1000003423() {
   return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
+    <div className="w-full flex justify-start">
       <Group13 />
-      <Description />
     </div>
   );
 }
@@ -417,7 +416,7 @@ function Frame1000006069() {
 
 function Frame1000006070() {
   return (
-    <div className="absolute content-stretch flex flex-col gap-[64px] items-start left-1/2 top-[128px] translate-x-[-50%] w-[424px]">
+    <div className="absolute content-stretch flex flex-col gap-[64px] items-start left-1/2 top-[128px] translate-x-[-50%] w-[458px]">
       <Group1000003423 />
       <Frame1000006069 />
     </div>
