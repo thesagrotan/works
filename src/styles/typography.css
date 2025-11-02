@@ -1,0 +1,266 @@
+/**
+ * Typography System
+ * Unified text properties for consistent styling across the application
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+  /* Font Families */
+  --font-sf-pro: 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sf-pro-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Font Sizes */
+  --text-xs: 0px;
+  --text-sm: 18px;
+  --text-base: 20px;
+  --text-lg: 22px;
+  --text-xl: 24px;
+  --text-2xl: 25px;
+  
+  /* Line Heights */
+  --leading-none: 0;
+  --leading-tight: 18px;
+  --leading-snug: 26px;
+  --leading-normal: 28px;
+  
+  /* Letter Spacing (Tracking) */
+  --tracking-tight: -0.18px;
+  --tracking-xs: 0.027px;
+  --tracking-sm: 0.036px;
+  --tracking-base: 0.0375px;
+  
+  /* Font Weights */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 510;
+  --font-bold: 700;
+  
+  /* Text Colors */
+  --text-primary: #323e45;
+  --text-secondary: #edefeb;
+  --text-black: #000000;
+}
+
+/* ============================================
+   Typography Utility Classes
+   ============================================ */
+
+/* Font Families */
+.font-sf-pro {
+  font-family: var(--font-sf-pro);
+}
+
+.font-sf-pro-display {
+  font-family: var(--font-sf-pro-display);
+}
+
+/* Font Weights */
+.font-regular {
+  font-weight: var(--font-regular);
+}
+
+.font-medium {
+  font-weight: var(--font-medium);
+}
+
+.font-semibold {
+  font-weight: var(--font-semibold);
+}
+
+.font-bold {
+  font-weight: var(--font-bold);
+}
+
+/* Font Sizes */
+.text-xs {
+  font-size: var(--text-xs);
+}
+
+.text-sm {
+  font-size: var(--text-sm);
+}
+
+.text-base {
+  font-size: var(--text-base);
+}
+
+.text-lg {
+  font-size: var(--text-lg);
+}
+
+.text-xl {
+  font-size: var(--text-xl);
+}
+
+.text-2xl {
+  font-size: var(--text-2xl);
+}
+
+/* Line Heights */
+.leading-none {
+  line-height: var(--leading-none);
+}
+
+.leading-tight {
+  line-height: var(--leading-tight);
+}
+
+.leading-snug {
+  line-height: var(--leading-snug);
+}
+
+.leading-normal {
+  line-height: var(--leading-normal);
+}
+
+/* Letter Spacing */
+.tracking-tight {
+  letter-spacing: var(--tracking-tight);
+}
+
+.tracking-xs {
+  letter-spacing: var(--tracking-xs);
+}
+
+.tracking-sm {
+  letter-spacing: var(--tracking-sm);
+}
+
+.tracking-base {
+  letter-spacing: var(--tracking-base);
+}
+
+/* Text Colors */
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-black {
+  color: var(--text-black);
+}
+
+/* ============================================
+   Composite Typography Classes
+   ============================================ */
+
+/* Hero Text - Large display text */
+.text-hero {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-sm);
+  color: var(--text-primary);
+}
+
+.text-hero-bold {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-sm);
+  color: var(--text-primary);
+}
+
+/* Heading Text */
+.text-heading {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-sm);
+  color: var(--text-primary);
+}
+
+.text-heading-lg {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-base);
+  color: var(--text-primary);
+}
+
+/* Body Text */
+.text-body {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-xs);
+  color: var(--text-primary);
+}
+
+.text-body-alt {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-xs);
+  color: var(--text-primary);
+}
+
+/* Button/CTA Text */
+.text-button {
+  font-family: var(--font-sf-pro);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-secondary);
+}
+
+/* Project Title */
+.text-project-title {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-sm);
+  color: var(--text-black);
+}
+
+.text-project-date {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-sm);
+  color: var(--text-black);
+}
+
+/* ============================================
+   Responsive Typography
+   ============================================ */
+
+@media (width >= 48rem) {
+  :root {
+    --text-xl: 25px;
+  }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.not-italic {
+  font-style: normal;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.whitespace-pre {
+  white-space: pre;
+}
+
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
