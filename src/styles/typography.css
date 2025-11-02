@@ -17,7 +17,7 @@
   --text-base: 20px;
   --text-lg: 22px;
   --text-xl: 24px;
-  --text-2xl: 25px;
+  --text-2xl: 24px;
   
   /* Line Heights */
   --leading-none: 0;
@@ -149,6 +149,13 @@
    Composite Typography Classes
    ============================================ */
 
+/* Unified Font Family Classes */
+.font-display-regular {
+  font-family: var(--font-sf-pro-display);
+  font-weight: var(--font-regular);
+  font-style: normal;
+}
+
 /* Hero Text - Large display text */
 .text-hero {
   font-family: var(--font-sf-pro-display);
@@ -241,7 +248,7 @@
 
 @media (width >= 48rem) {
   :root {
-    --text-xl: 25px;
+    --text-xl: 24px;
   }
 }
 

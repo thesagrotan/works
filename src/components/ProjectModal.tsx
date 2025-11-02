@@ -7,6 +7,48 @@ import imgAttachment1 from "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355
 import imgAttachment2 from "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png";
 import { useAnimationControls } from './AnimationControls';
 
+// Get animation variants based on selected effect
+function getModalVariants(effect: string, scaleFrom: number, rotateFrom: number) {
+  const transitionConfig = {
+    spring: { type: 'spring', damping: 30, stiffness: 300 },
+    tween: { duration: 0.5 }
+  };
+
+  switch (effect) {
+    case 'fade':
+      return {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 }
+      };
+    case 'scale':
+      return {
+        initial: { opacity: 0, scale: scaleFrom },
+        animate: { opacity: 1, scale: 1 },
+        exit: { opacity: 0, scale: scaleFrom }
+      };
+    case 'rotate':
+      return {
+        initial: { opacity: 0, scale: scaleFrom, rotate: rotateFrom },
+        animate: { opacity: 1, scale: 1, rotate: 0 },
+        exit: { opacity: 0, scale: scaleFrom, rotate: rotateFrom }
+      };
+    case 'popup':
+      return {
+        initial: { opacity: 0, scale: 0.5, y: 20 },
+        animate: { opacity: 1, scale: 1, y: 0 },
+        exit: { opacity: 0, scale: 0.5, y: 20 }
+      };
+    case 'slide-up':
+    default:
+      return {
+        initial: { y: '100%' },
+        animate: { y: 0 },
+        exit: { y: '100%' }
+      };
+  }
+}
+
 interface ProjectModalProps {
   projectId: string;
   onClose: () => void;
@@ -18,6 +60,9 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
     backdropOpacity,
     modalDamping,
     modalStiffness,
+    modalAppearanceEffect,
+    modalScaleFrom,
+    modalRotateFrom,
     layoutDuration,
     layoutType,
     layoutDamping,
@@ -55,11 +100,10 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
       />
       
       <motion.div
-        initial={{ y: '100%' }}
-        animate={{ y: 0 }}
-        exit={{ y: '100%' }}
+        {...getModalVariants(modalAppearanceEffect, modalScaleFrom, modalRotateFrom)}
         transition={{ type: 'spring', damping: modalDamping, stiffness: modalStiffness }}
         className="fixed inset-0 z-50 overflow-y-auto"
+        style={{ transformOrigin: 'center center' }}
       >
         <div className="bg-[#edefeb] min-h-screen w-full">
           <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-16">
@@ -100,19 +144,19 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
               <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full lg:w-[180px]">
                 <div className="content-stretch flex flex-col gap-[16px] items-start leading-[28px] not-italic relative shrink-0 text-[20px] md:text-[24px] text-black tracking-[0.036px] w-full">
                   <p className="font-['SF_Pro_Display:Semibold',sans-serif] relative shrink-0 w-full">CredCore</p>
-                  <p className="font-['SF_Pro_Display:Regular',sans-serif] relative shrink-0 w-full">2023-2025</p>
+                  <p className="font-display-regular relative shrink-0 w-full">2023-2025</p>
                 </div>
                 
                 <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
                   <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
                     <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-                      <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">UX/UI Design</p>
+                      <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">UX/UI Design</p>
                     </div>
                     <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-                      <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">Design Systems</p>
+                      <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">Design Systems</p>
                     </div>
                     <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-                      <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[26px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">Framer</p>
+                      <p className="font-display-regular leading-[26px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">Framer</p>
                     </div>
                   </div>
                 </div>
@@ -120,7 +164,7 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
 
               <div className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 w-full lg:max-w-[399px]">
                 <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full">
-                  <div className="font-['SF_Pro_Display:Regular',sans-serif] leading-[0] not-italic relative shrink-0 text-[#323e45] text-[0px] tracking-[0.036px] w-full">
+                  <div className="font-display-regular leading-[0] not-italic relative shrink-0 text-[#323e45] text-[0px] tracking-[0.036px] w-full">
                     <p className="leading-[28px] mb-4 text-[20px] md:text-[24px]">
                       <span>{`I'm Daniel Campagne, `}</span>
                       <span className="font-['SF_Pro_Display:Semibold',sans-serif] not-italic">{`a product designer `}</span>who transforms complex systems into intuitive experiences<span>{` while `}</span>helping brands tell their stories effectively.
@@ -135,7 +179,7 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
             </div>
 
             {/* Image Grid */}
-            <div className="content-start flex flex-wrap gap-10 items-start relative shrink-0 w-full">
+            <div className="content-start flex flex-wrap gap-8 items-start relative shrink-0 w-full">
               <motion.div 
                 layoutId={`${projectId}-img-3`}
                 transition={
@@ -165,7 +209,7 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                 className="bg-stone-50 h-auto relative rounded-[8px] shrink-0 w-full lg:w-[calc(40%-20px)]"
               >
                 <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[inherit] w-full">
-                  <div className="aspect-[141.794/92] relative shrink-0 w-full">
+                  <div className="aspect-[285/178] relative shrink-0 w-full">
                     <div className="absolute inset-0 overflow-hidden pointer-events-none">
                       <img alt="" className="absolute h-[347.31%] left-[-16.64%] max-w-none top-[0.52%] w-[346.68%]" src={imgAttachment1} />
                     </div>

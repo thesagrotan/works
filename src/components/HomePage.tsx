@@ -70,7 +70,7 @@ function BrandLogo() {
 // Portfolio project card component with image preview
 function PortfolioProjectCard({ id, title, onClick, hoverScale, hoverDuration }: { id: string; title: string; onClick: (id: string) => void; hoverScale: number; hoverDuration: number }) {
   return (
-    <button onClick={() => onClick(id)} className="block group w-full text-left cursor-pointer">
+    <button onClick={() => onClick(id)} className="block group w-full text-left cursor-pointer bg-[hsl(105,11%,96%)]">
       <div className="content-stretch flex gap-[64px] items-end relative shrink-0 w-full">
         <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-[144px]">
           <div className="h-[20px] relative shrink-0 w-[107px]">
@@ -123,7 +123,7 @@ function PortfolioProjectCard({ id, title, onClick, hoverScale, hoverDuration }:
             transition={{ duration: hoverDuration }}
           >
             <div className="content-stretch flex flex-col h-[178px] items-start overflow-clip relative rounded-[inherit] w-[285px]">
-              <div className="aspect-[141.794/92] relative shrink-0 w-full">
+              <div className="aspect-[285/178] relative shrink-0 w-full">
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                   <img alt="" className="absolute h-[347.31%] left-[-16.64%] max-w-none top-[0.52%] w-[346.68%]" src={imgAttachment1} />
                 </div>
@@ -158,7 +158,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
   return (
     <LayoutGroup>
       <div className="bg-[#edefeb] min-h-screen w-full overflow-x-hidden">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-16">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-24">
         {/* Hero Section */}
         <div className="flex flex-col items-center gap-16 mb-24">
           <BrandLogo />
@@ -180,7 +180,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                 transition={{ duration: buttonHoverDuration }}
               >
                 <div className="flex flex-col justify-center leading-none relative shrink-0 text-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
-                  <p className="text-button whitespace-pre">Chat with me</p>
+                  <p className="text-button whitespace-pre">Get in touch</p>
                 </div>
               </motion.div>
             </div>
@@ -188,7 +188,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
         </div>
 
         {/* Infinite Carousel */}
-        <div className="mb-32 -mx-4 md:-mx-8 lg:-mx-16 flex justify-center">
+        <div className="mb-24 -mx-4 md:-mx-8 lg:-mx-16 flex justify-center">
           <div className="max-w-[458px] w-full">
             <InfiniteCarousel />
           </div>
@@ -211,7 +211,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
               <div className="content-stretch flex flex-wrap gap-x-8 gap-y-4 items-center relative shrink-0">
                 <div className="content-stretch flex flex-col items-start relative shrink-0 w-[207px]">
                   <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-heading-lg not-italic relative shrink-0 text-nowrap whitespace-pre">{`Product Design `}</p>
+                    <p className="text-hero not-italic relative shrink-0 text-nowrap whitespace-pre">{`Product Design `}</p>
                     <div className="h-0 relative shrink-0 w-full">
                       <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
                         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -221,7 +221,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                     </div>
                   </div>
                   <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-heading-lg not-italic relative shrink-0 text-nowrap whitespace-pre">{`Web Design `}</p>
+                    <p className="text-hero not-italic relative shrink-0 text-nowrap whitespace-pre">{`Web Design `}</p>
                     <div className="h-0 relative shrink-0 w-full">
                       <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
                         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -231,7 +231,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                     </div>
                   </div>
                   <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-heading-lg not-italic relative shrink-0 text-nowrap whitespace-pre">Visual Identity</p>
+                    <p className="text-hero not-italic relative shrink-0 text-nowrap whitespace-pre">Visual Identity</p>
                     <div className="h-0 relative shrink-0 w-full">
                       <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
                         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -243,7 +243,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                 </div>
                 <div className="content-stretch flex flex-col items-start relative shrink-0 w-[207px]">
                   <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-heading-lg not-italic relative shrink-0 text-nowrap whitespace-pre">Design Systems</p>
+                    <p className="text-hero not-italic relative shrink-0 text-nowrap whitespace-pre">Design Systems</p>
                     <div className="h-0 relative shrink-0 w-full">
                       <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
                         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -253,7 +253,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                     </div>
                   </div>
                   <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-heading-lg not-italic relative shrink-0 text-nowrap whitespace-pre">Framer</p>
+                    <p className="text-hero not-italic relative shrink-0 text-nowrap whitespace-pre">Framer</p>
                     <div className="h-0 relative shrink-0 w-full">
                       <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
                         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -263,7 +263,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                     </div>
                   </div>
                   <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-heading-lg not-italic relative shrink-0 text-nowrap whitespace-pre">Prototypes</p>
+                    <p className="text-hero relative shrink-0 text-nowrap whitespace-pre">Prototypes</p>
                     <div className="h-0 relative shrink-0 w-full">
                       <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
                         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -281,7 +281,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
           <div className="max-w-[458px]">
             <div className="content-stretch flex flex-col gap-[32px] items-start leading-normal not-italic relative shrink-0 text-primary w-full mb-10">
               <p className="text-heading relative shrink-0 md:text-xl w-full">About me</p>
-              <p className="text-heading-lg relative shrink-0 w-full">I approach projects from a tactical standpoint and make decisions based on my intuition</p>
+              <p className="text-hero relative shrink-0 w-full">I approach projects from a tactical standpoint and make decisions based on my intuition</p>
             </div>
             <motion.div 
               className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[14px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer"
@@ -289,7 +289,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
               transition={{ duration: buttonHoverDuration }}
             >
               <div className="flex flex-col justify-center leading-none relative shrink-0 text-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
-                <p className="text-button whitespace-pre">Chat with me</p>
+                <p className="text-button whitespace-pre center">Get in touch</p>
               </div>
             </motion.div>
           </div>

@@ -384,12 +384,12 @@ function Group1000003423() {
 function Frame1000006068() {
   return (
     <div className="content-stretch flex flex-col gap-[32px] items-start leading-[0] not-italic relative shrink-0 text-[#323e45] text-[0px] tracking-[0.036px] w-full">
-      <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] relative shrink-0 text-[24px] w-full">
+      <p className="font-display-regular leading-[28px] relative shrink-0 text-[24px] w-full">
         <span>{`I’m Daniel Campagne, `}</span>
         <span className="font-['SF_Pro_Display:Semibold',sans-serif] not-italic">{`a product designer `}</span>who transforms complex systems into intuitive experiences<span>{` while `}</span>helping brands tell their stories effectively.
       </p>
       <p className="font-['SF_Pro_Display:Bold',sans-serif] leading-[28px] relative shrink-0 text-[24px] w-full whitespace-pre-wrap">
-        <span className="font-['SF_Pro_Display:Semibold',sans-serif] not-italic">With over 15 years of experience</span> <span className="font-['SF_Pro_Display:Regular',sans-serif] not-italic">{`for the last years helping startups on b2b and b2c solutions  in the areas fo mobility, fintech, DeFi, and digital health.`}</span>
+        <span className="font-['SF_Pro_Display:Semibold',sans-serif] not-italic">With over 15 years of experience</span> <span className="font-display-regular not-italic">{`for the last years helping startups on b2b and b2c solutions  in the areas fo mobility, fintech, DeFi, and digital health.`}</span>
       </p>
     </div>
   );
@@ -399,7 +399,7 @@ function Frame4() {
   return (
     <div className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[14px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0">
       <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] font-[510] justify-center leading-[0] relative shrink-0 text-[#edefeb] text-[18px] text-nowrap tracking-[-0.18px]" style={{ fontVariationSettings: "'wdth' 100" }}>
-        <p className="leading-[18px] whitespace-pre">Chat with me</p>
+        <p className="leading-[18px] whitespace-pre">Get in touch</p>
       </div>
     </div>
   );
@@ -445,7 +445,7 @@ function Frame() {
 function Frame1000003440() {
   return (
     <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-      <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px] w-[144px]">UX/UI Design</p>
+      <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px] w-[144px]">UX/UI Design</p>
       <div className="h-0 relative shrink-0 w-full">
         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32">
           <g id="Line 9"></g>
@@ -458,7 +458,7 @@ function Frame1000003440() {
 function Frame1000003453() {
   return (
     <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-      <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px] w-[144px]">Design Systems</p>
+      <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px] w-[144px]">Design Systems</p>
       <div className="h-0 relative shrink-0 w-full">
         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32">
           <g id="Line 9"></g>
@@ -471,7 +471,7 @@ function Frame1000003453() {
 function Frame1000003454() {
   return (
     <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-      <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[26px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px] w-[144px]">Framer</p>
+      <p className="font-display-regular leading-[26px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px] w-[144px]">Framer</p>
       <div className="h-0 relative shrink-0 w-full">
         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32">
           <g id="Line 9"></g>
@@ -587,7 +587,7 @@ function Frame1000003443() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-[207px]">
       <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[25px] text-nowrap tracking-[0.0375px] whitespace-pre">{`Product Design `}</p>
+        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">{`Product Design `}</p>
         <div className="h-0 relative shrink-0 w-full">
           <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -597,7 +597,7 @@ function Frame1000003443() {
         </div>
       </div>
       <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[25px] text-nowrap tracking-[0.0375px] whitespace-pre">{`Web Design `}</p>
+        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">{`Web Design `}</p>
         <div className="h-0 relative shrink-0 w-full">
           <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -607,7 +607,7 @@ function Frame1000003443() {
         </div>
       </div>
       <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[25px] text-nowrap tracking-[0.0375px] whitespace-pre">Visual Identity</p>
+        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">Visual Identity</p>
         <div className="h-0 relative shrink-0 w-full">
           <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -624,7 +624,7 @@ function Frame1000003444() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-[207px]">
       <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[25px] text-nowrap tracking-[0.0375px] whitespace-pre">Design Systems</p>
+        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">Design Systems</p>
         <div className="h-0 relative shrink-0 w-full">
           <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -634,7 +634,7 @@ function Frame1000003444() {
         </div>
       </div>
       <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[25px] text-nowrap tracking-[0.0375px] whitespace-pre">Framer</p>
+        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">Framer</p>
         <div className="h-0 relative shrink-0 w-full">
           <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -644,7 +644,7 @@ function Frame1000003444() {
         </div>
       </div>
       <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-['SF_Pro_Display:Regular',sans-serif] leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[25px] text-nowrap tracking-[0.0375px] whitespace-pre">Prototypes</p>
+        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">Prototypes</p>
         <div className="h-0 relative shrink-0 w-full">
           <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
@@ -679,7 +679,7 @@ function Frame1000006076() {
   return (
     <div className="content-stretch flex flex-col gap-[32px] items-start leading-[28px] not-italic relative shrink-0 text-[#323e45] w-full">
       <p className="font-['SF_Pro_Display:Semibold',sans-serif] relative shrink-0 text-[24px] tracking-[0.036px] w-full">About me</p>
-      <p className="font-['SF_Pro_Display:Regular',sans-serif] relative shrink-0 text-[25px] tracking-[0.0375px] w-full">I approach projects from a tactical standpoint and make decisions based on my intuition</p>
+      <p className="text-hero md:text-xl relative shrink-0  tracking-[0.0375px] w-full">I approach projects from a tactical standpoint and make decisions based on my intuition</p>
     </div>
   );
 }
@@ -688,7 +688,7 @@ function Frame5() {
   return (
     <div className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[14px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0">
       <div className="flex flex-col font-['SF_Pro:Medium',sans-serif] font-[510] justify-center leading-[0] relative shrink-0 text-[#edefeb] text-[18px] text-nowrap tracking-[-0.18px]" style={{ fontVariationSettings: "'wdth' 100" }}>
-        <p className="leading-[18px] whitespace-pre">Chat with me</p>
+        <p className="leading-[18px] whitespace-pre">Get in touch</p>
       </div>
     </div>
   );

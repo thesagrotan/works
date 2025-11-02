@@ -25,6 +25,17 @@ export function useAnimationControls() {
       modalDamping: { value: 30, min: 10, max: 50, step: 1, label: 'Spring Damping' },
       modalStiffness: { value: 300, min: 100, max: 500, step: 10, label: 'Spring Stiffness' },
     }),
+
+    // ===== Modal Appearance Effect =====
+    'Modal Appearance Effect': folder({
+      modalAppearanceEffect: { 
+        value: 'fade', 
+        options: ['slide-up', 'fade', 'scale', 'rotate', 'popup'],
+        label: 'Effect Type' 
+      },
+      modalScaleFrom: { value: 0.9, min: 0.5, max: 1.0, step: 0.05, label: 'Scale Start' },
+      modalRotateFrom: { value: -5, min: -45, max: 45, step: 1, label: 'Rotate Start (deg)' },
+    }),
     
     // ===== Layout Animations =====
     'Layout Transition': folder({
