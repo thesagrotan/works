@@ -3,9 +3,6 @@
  * Unified text properties for consistent styling across the application
  */
 
-/* ============================================
-   CSS Custom Properties (Design Tokens)
-   ============================================ */
 :root {
   /* Font Families */
   --font-sf-pro: 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;

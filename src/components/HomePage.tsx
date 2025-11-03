@@ -4,6 +4,7 @@ import { imgGroup14 } from "../imports/svg-logo-paths";
 import InfiniteCarousel from './InfiniteCarousel';
 import { useAnimationControls } from './AnimationControls';
 import { projects, type Project } from '../data/projects';
+import ProjectLink from './ProjectLink';
 
 interface HomePageProps {
   onProjectClick: (projectId: string) => void;
@@ -92,7 +93,7 @@ function PortfolioProjectCard({
     <button onClick={() => onClick(id)} className="block group w-full text-left cursor-pointer border border-[#323e45] border-solid rounded-[8px] p-4">
       <div className="content-stretch flex gap-[64px] items-end relative shrink-0 w-full">
         <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-[144px]">
-          <div className="h-[20px] relative shrink-0 w-[107px]">
+          <div className="h-[20px] relative shrink-0 w-[107px] mt-[-44px]">
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 107 20">
               <g clipPath="url(#clip0_1_283)">
                 <path d={svgPaths.p2b26df80} fill="var(--fill-0, #323E45)" />
@@ -275,68 +276,14 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
               <p className="text-heading not-italic relative shrink-0 md:text-xl">Here to help you with...</p>
               <div className="content-stretch flex flex-wrap gap-x-8 gap-y-4 items-center relative shrink-0">
                 <div className="content-stretch flex flex-col items-start relative shrink-0 w-[207px]">
-                  <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-hero not-italic relative shrink-0 text-nowrap whitespace-pre">{`Product Design `}</p>
-                    <div className="h-0 relative shrink-0 w-full">
-                      <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-                          <line stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-hero not-italic relative shrink-0 text-nowrap whitespace-pre">{`Web Design `}</p>
-                    <div className="h-0 relative shrink-0 w-full">
-                      <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-                          <line stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-hero not-italic relative shrink-0 text-nowrap whitespace-pre">Visual Identity</p>
-                    <div className="h-0 relative shrink-0 w-full">
-                      <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-                          <line stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
+                  <ProjectLink label="Product Design " />
+                  <ProjectLink label="Web Design " />
+                  <ProjectLink label="Visual Identity" />
                 </div>
                 <div className="content-stretch flex flex-col items-start relative shrink-0 w-[207px]">
-                  <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-hero not-italic relative shrink-0 text-nowrap whitespace-pre">Design Systems</p>
-                    <div className="h-0 relative shrink-0 w-full">
-                      <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-                          <line stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-hero not-italic relative shrink-0 text-nowrap whitespace-pre">Framer</p>
-                    <div className="h-0 relative shrink-0 w-full">
-                      <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-                          <line stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-                    <p className="text-hero relative shrink-0 text-nowrap whitespace-pre">Prototypes</p>
-                    <div className="h-0 relative shrink-0 w-full">
-                      <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-                          <line stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
+                  <ProjectLink label="Design Systems" />
+                  <ProjectLink label="Framer" />
+                  <ProjectLink label="Prototypes" />
                 </div>
               </div>
             </div>

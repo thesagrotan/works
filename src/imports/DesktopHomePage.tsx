@@ -3,6 +3,7 @@ import imgAttachment from "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.
 import imgAttachment1 from "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png";
 import imgAttachment2 from "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png";
 import { imgGroup14 } from "./svg-logo-paths";
+import ProjectLink from "../components/ProjectLink";
 
 function CircularPatternOverlay() {
   return (
@@ -547,7 +548,7 @@ function Frame1000003455() {
 
 function Group1000004897() {
   return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
+    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 pt-[-20px]">
       <Frame1000003456 />
       <Frame1000003457 />
       <Frame1000003455 />
@@ -586,36 +587,9 @@ function Frame1000006077() {
 function Frame1000003443() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-[207px]">
-      <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">{`Product Design `}</p>
-        <div className="h-0 relative shrink-0 w-full">
-          <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-              <line id="Line 9" stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">{`Web Design `}</p>
-        <div className="h-0 relative shrink-0 w-full">
-          <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-              <line id="Line 9" stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">Visual Identity</p>
-        <div className="h-0 relative shrink-0 w-full">
-          <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-              <line id="Line 9" stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-            </svg>
-          </div>
-        </div>
-      </div>
+      <ProjectLink label="Product Design " />
+      <ProjectLink label="Web Design " />
+      <ProjectLink label="Visual Identity" />
     </div>
   );
 }
@@ -623,36 +597,9 @@ function Frame1000003443() {
 function Frame1000003444() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-[207px]">
-      <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">Design Systems</p>
-        <div className="h-0 relative shrink-0 w-full">
-          <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-              <line id="Line 9" stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">Framer</p>
-        <div className="h-0 relative shrink-0 w-full">
-          <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-              <line id="Line 9" stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div className="box-border content-stretch flex flex-col gap-[8px] items-start justify-center px-0 py-[2px] relative shrink-0 w-full">
-        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[24px] text-nowrap tracking-[0.0375px] whitespace-pre">Prototypes</p>
-        <div className="h-0 relative shrink-0 w-full">
-          <div className="absolute bottom-0 left-0 right-0 top-[-1px]" style={{ "--stroke-0": "rgba(50, 62, 69, 1)" } as React.CSSProperties}>
-            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 207 1">
-              <line id="Line 9" stroke="var(--stroke-0, #323E45)" strokeDasharray="1 3" x2="207" y1="0.5" y2="0.5" />
-            </svg>
-          </div>
-        </div>
-      </div>
+      <ProjectLink label="Design Systems" />
+      <ProjectLink label="Framer" />
+      <ProjectLink label="Prototypes" />
     </div>
   );
 }
