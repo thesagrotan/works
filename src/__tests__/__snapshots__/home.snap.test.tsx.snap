@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HomePage baseline snapshot > captures stable DOM semantics for Selected Work 1`] = `
+{
+  "firstCardAltTexts": [
+    "CredCore Project Screenshot 2",
+    "CredCore Project Screenshot 1",
+    "CredCore Project Screenshot 3",
+  ],
+  "layoutIdMarkersPresent": [
+    false,
+    false,
+    false,
+  ],
+  "selectedWorkProjects": 4,
+}
+`;

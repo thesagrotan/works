@@ -37,6 +37,13 @@ export interface Project {
   };
 }
 
+/**
+ * AI_CLARIFY: Asset alias mapping policy
+ * - This map intentionally resolves exactly three known figma assets to their imported modules.
+ * - Any image src not listed here will pass through unchanged (fallback behavior preserved).
+ * - If additional assets are introduced, extend this map behind tests (see src/__tests__/projects.test.ts)
+ *   and keep behavior documented with AI_* tags per the Five Laws of Code Restructuring.
+ */
 // Map of image paths to imported modules
 const imageMap: Record<string, string> = {
   "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png": credcoreImg1,

@@ -1,0 +1,57 @@
+# AI_OTHER: CI workflow added per T003 — tooling-only, no effect on runtime behavior
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  build-test:
+    name: Typecheck, Test, and Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Summarize ESLint complexity (informational)
+        run: |
+          npx eslint . --ext .ts,.tsx,.js,.jsx -f unix > eslint.out || true
+          COMPLEX=$(grep -E ": warning .*complexity" -c eslint.out || true)
+          echo "ESLint complexity warnings: ${COMPLEX}" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      # AI_GOOD: Build size baseline comparison (informational only)
+      # AI_CLARIFY: Threshold is reported, not enforced as failure per refactor plan
+      - name: Compare build size to baseline
+        run: |
+          node -e "const fs=require('fs');const path=require('path');const thresholdPct=3;function readJson(p){return JSON.parse(fs.readFileSync(p,'utf8'));}const baselinePath='src/__tests__/baselines/build.json';let baseline;try{baseline=readJson(baselinePath);}catch(e){console.warn('Baseline missing or unreadable:',e.message);baseline=null;}const assetsDir=path.join('build','assets');let jsFile=null,cssFile=null;try{const files=fs.readdirSync(assetsDir);jsFile=files.find(f=>/^index-.*\.js$/.test(f))||null;cssFile=files.find(f=>/^index-.*\.css$/.test(f))||null;}catch(e){console.error('Failed to read build assets dir:',assetsDir,e.message);}function fileBytes(p){try{return fs.statSync(p).size;}catch{return null;}}const current={entry:{js:{file:jsFile?path.join('build','assets',jsFile):null,bytes:null},css:{file:cssFile?path.join('build','assets',cssFile):null,bytes:null}}};if(current.entry.js.file){current.entry.js.bytes=fileBytes(current.entry.js.file);}if(current.entry.css.file){current.entry.css.bytes=fileBytes(current.entry.css.file);}const diff={thresholdPct, timestamp:new Date().toISOString(), entry:{js:{baselineFile:baseline?.entry?.js?.file??null, baselineBytes:baseline?.entry?.js?.bytes??null, currentFile:current.entry.js.file, currentBytes:current.entry.js.bytes, deltaPct:baseline?.entry?.js?.bytes?(((current.entry.js.bytes-baseline.entry.js.bytes)/baseline.entry.js.bytes)*100):null}, css:{baselineFile:baseline?.entry?.css?.file??null, baselineBytes:baseline?.entry?.css?.bytes??null, currentFile:current.entry.css.file, currentBytes:current.entry.css.bytes, deltaPct:baseline?.entry?.css?.bytes?(((current.entry.css.bytes-baseline.entry.css.bytes)/baseline.entry.css.bytes)*100):null}}};fs.writeFileSync('build-size-diff.json',JSON.stringify(diff,null,2));const summaryLines=[];summaryLines.push('Build size comparison vs baseline (±'+thresholdPct+'% acceptable)');for(const kind of ['js','css']){const d=diff.entry[kind];if(d.baselineBytes!=null&&d.currentBytes!=null&&d.deltaPct!=null){const within=Math.abs(d.deltaPct)<=thresholdPct;summaryLines.push(`- ${kind.toUpperCase()}: baseline ${d.baselineBytes}B → current ${d.currentBytes}B (Δ ${d.deltaPct.toFixed(2)}%) ${within?'✅ within':'⚠️ exceeds'}`);}else{summaryLines.push(`- ${kind.toUpperCase()}: insufficient data for comparison`);}}console.log(summaryLines.join('\n'));if(process.env.GITHUB_STEP_SUMMARY){fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summaryLines.join('\n')+'\n');}"
+
+      - name: Upload build-size diff artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-size-diff
+          path: build-size-diff.json
+          if-no-files-found: warn

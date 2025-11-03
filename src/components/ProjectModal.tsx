@@ -4,48 +4,10 @@ import { ArrowLeft } from 'lucide-react';
 import svgPaths from '../imports/svg-navigation-paths';
 import { useAnimationControls } from './AnimationControls';
 import { getProjectById } from '../data/projects';
+import { getModalVariants } from '../animation/modalVariants'; // AI_GOOD: Using extracted function preserves behavior and return shape.
+import { buildImgStyle } from '../lib/imageStyle';
 
-// Get animation variants based on selected effect
-function getModalVariants(effect: string, scaleFrom: number, rotateFrom: number) {
-  const transitionConfig = {
-    spring: { type: 'spring', damping: 30, stiffness: 300 },
-    tween: { duration: 0.5 }
-  };
-
-  switch (effect) {
-    case 'fade':
-      return {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 }
-      };
-    case 'scale':
-      return {
-        initial: { opacity: 0, scale: scaleFrom },
-        animate: { opacity: 1, scale: 1 },
-        exit: { opacity: 0, scale: scaleFrom }
-      };
-    case 'rotate':
-      return {
-        initial: { opacity: 0, scale: scaleFrom, rotate: rotateFrom },
-        animate: { opacity: 1, scale: 1, rotate: 0 },
-        exit: { opacity: 0, scale: scaleFrom, rotate: rotateFrom }
-      };
-    case 'popup':
-      return {
-        initial: { opacity: 0, scale: 0.5, y: 20 },
-        animate: { opacity: 1, scale: 1, y: 0 },
-        exit: { opacity: 0, scale: 0.5, y: 20 }
-      };
-    case 'slide-up':
-    default:
-      return {
-        initial: { y: '100%' },
-        animate: { y: 0 },
-        exit: { y: '100%' }
-      };
-  }
-}
+// AI_GOOD: getModalVariants moved to src/animation/modalVariants.ts with identical cases and defaults.
 
 interface ProjectModalProps {
   projectId: string;
@@ -207,12 +169,8 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                   <img 
                     alt={img3.alt} 
                     className="w-full h-full"
-                    style={{
-                      objectFit: img3.objectFit || 'none',
-                      objectPosition: img3.objectPosition || 'center',
-                      transform: `scale(${img3.scale || 1}) translate(${img3.translateX || '0'}, ${img3.translateY || '0'})`,
-                      transformOrigin: img3.objectPosition || 'center'
-                    }}
+                    // AI_GOOD: Use centralized builder; modal fallbackFit='none' to match original default here
+                    style={buildImgStyle(img3, 'none')}
                     src={img3.src} 
                   />
                   <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
@@ -230,12 +188,8 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                   <img 
                     alt={img2.alt} 
                     className="w-full h-full"
-                    style={{
-                      objectFit: img2.objectFit || 'none',
-                      objectPosition: img2.objectPosition || 'center',
-                      transform: `scale(${img2.scale || 1}) translate(${img2.translateX || '0'}, ${img2.translateY || '0'})`,
-                      transformOrigin: img2.objectPosition || 'center'
-                    }}
+                    // AI_GOOD: Centralized style builder with identical output; fallbackFit='none'
+                    style={buildImgStyle(img2, 'none')}
                     src={img2.src} 
                   />
                   <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
@@ -253,12 +207,8 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                   <img 
                     alt={img1.alt} 
                     className="w-full h-full"
-                    style={{
-                      objectFit: img1.objectFit || 'none',
-                      objectPosition: img1.objectPosition || 'center',
-                      transform: `scale(${img1.scale || 1}) translate(${img1.translateX || '0'}, ${img1.translateY || '0'})`,
-                      transformOrigin: img1.objectPosition || 'center'
-                    }}
+                    // AI_GOOD: Centralized style builder with identical output; fallbackFit='none'
+                    style={buildImgStyle(img1, 'none')}
                     src={img1.src} 
                   />
                   <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />

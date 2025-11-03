@@ -1,0 +1,11 @@
+node_modules/
+dist/
+build/
+coverage/
+.vite/
+
+# Vendor-like UI components (reduce lint noise during refactor)
+src/components/ui/**
+
+# Generated assets
+public/
