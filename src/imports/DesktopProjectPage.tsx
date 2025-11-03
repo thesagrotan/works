@@ -140,9 +140,9 @@ function Frame1000003457() {
   return (
     <div className="bg-stone-50 h-[387px] relative rounded-[8px] shrink-0 w-[400px]">
       <div className="content-stretch flex flex-col h-[387px] items-start overflow-clip relative rounded-[inherit] w-[400px]">
-        <div className="aspect-[285/178] relative shrink-0 w-full" data-name="$attachment">
+        <div className="aspect-[141.794/92] relative shrink-0 w-full" data-name="$attachment">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <img alt="" className="absolute h-[347.31%] left-[-16.64%] max-w-none top-[0.52%] w-[346.68%]" src={imgAttachment1} />
+            <img alt="" className="absolute h-[225%] left-[-16.64%] max-w-none top-[0.52%] w-[346.68%]" src={imgAttachment1} />
           </div>
         </div>
       </div>

@@ -123,7 +123,7 @@ function PortfolioProjectCard({ id, title, onClick, hoverScale, hoverDuration }:
             transition={{ duration: hoverDuration }}
           >
             <div className="content-stretch flex flex-col h-[178px] items-start overflow-clip relative rounded-[inherit] w-[285px]">
-              <div className="aspect-[285/178] relative shrink-0 w-full">
+              <div className="aspect-[141.794/92]  relative shrink-0 w-full">
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                   <img alt="" className="absolute h-[347.31%] left-[-16.64%] max-w-none top-[0.52%] w-[346.68%]" src={imgAttachment1} />
                 </div>
@@ -175,7 +175,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                 </p>
               </div>
               <motion.div 
-                className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[14px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer"
+                className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[8px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer"
                 whileHover={{ scale: buttonHoverScale, backgroundColor: '#44403c' }}
                 transition={{ duration: buttonHoverDuration }}
               >
@@ -284,7 +284,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
               <p className="text-hero relative shrink-0 w-full">I approach projects from a tactical standpoint and make decisions based on my intuition</p>
             </div>
             <motion.div 
-              className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[14px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer"
+              className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[8px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer"
               whileHover={{ scale: buttonHoverScale, backgroundColor: '#44403c' }}
               transition={{ duration: buttonHoverDuration }}
             >

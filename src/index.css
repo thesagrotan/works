@@ -823,8 +823,8 @@
     gap: 8px;
   }
 
-  .gap-\[13px\] {
-    gap: 13px;
+  .gap-\[12px\] {
+    gap: 12px;
   }
 
   .gap-\[16px\] {
@@ -1266,6 +1266,12 @@
   @media (width >= 64rem) {
     .lg\:max-w-\[399px\] {
       max-width: 399px;
+    }
+        .lg\:max-w-\[600px\] {
+      max-width: 600px;
+    }
+            .lg\:max-w-\[940px\] {
+      max-width: 940px;
     }
   }
 

@@ -41,7 +41,7 @@ export function useAnimationControls() {
     'Layout Transition': folder({
       layoutDuration: { value: 0.5, min: 0.3, max: 1.5, step: 0.05, label: 'Duration (s)' },
       layoutType: { value: 'spring', options: ['spring', 'tween'], label: 'Type' },
-      layoutDamping: { value: 25, min: 15, max: 40, step: 1, label: 'Spring Damping' },
+      layoutDamping: { value: 30, min: 15, max: 40, step: 1, label: 'Spring Damping' },
       layoutStiffness: { value: 250, min: 100, max: 400, step: 10, label: 'Spring Stiffness' },
     }),
     
