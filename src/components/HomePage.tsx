@@ -89,7 +89,7 @@ function PortfolioProjectCard({
   const [img1, img2, img3] = images.card;
   
   return (
-    <button onClick={() => onClick(id)} className="block group w-full text-left cursor-pointer bg-[hsl(105,11%,96%)] border border-[#323e45] border-solid rounded-[8px] p-4">
+    <button onClick={() => onClick(id)} className="block group w-full text-left cursor-pointer border border-[#323e45] border-solid rounded-[8px] p-4">
       <div className="content-stretch flex gap-[64px] items-end relative shrink-0 w-full">
         <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-[144px]">
           <div className="h-[20px] relative shrink-0 w-[107px]">
@@ -249,8 +249,8 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
         </div>
 
         {/* Selected Work */}
-        <div className="mmax-w-[1200px] mx-auto flex flex-col justify-center items-center">
-          <div className="content-stretch flex flex-col items-center gap-[40px] items-start relative shrink-0 max-w-[424px] w-full mb-20">
+        <div className="max-w-[1200px] mx-auto flex flex-col justify-center items-center">
+          <div className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 max-w-[424px] w-full mb-20">
             <p className="text-heading not-italic relative shrink-0 md:text-xl w-full">Selected Work</p>
             <div className="content-stretch flex flex-col gap-[56px] items-start relative shrink-0 w-full">
               {projects.map((project) => (
