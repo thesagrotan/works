@@ -1,11 +1,9 @@
 import { motion, LayoutGroup } from 'motion/react';
 import svgPaths from '../imports/svg-hero-paths';
-import imgAttachment from "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png";
-import imgAttachment1 from "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png";
-import imgAttachment2 from "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png";
 import { imgGroup14 } from "../imports/svg-logo-paths";
 import InfiniteCarousel from './InfiniteCarousel';
 import { useAnimationControls } from './AnimationControls';
+import { projects, type Project } from '../data/projects';
 
 interface HomePageProps {
   onProjectClick: (projectId: string) => void;
@@ -68,9 +66,30 @@ function BrandLogo() {
 }
 
 // Portfolio project card component with image preview
-function PortfolioProjectCard({ id, title, onClick, hoverScale, hoverDuration }: { id: string; title: string; onClick: (id: string) => void; hoverScale: number; hoverDuration: number }) {
+function PortfolioProjectCard({ 
+  project, 
+  onClick, 
+  hoverScale, 
+  hoverDuration, 
+  layoutType, 
+  layoutExitDamping, 
+  layoutStiffness, 
+  layoutDuration 
+}: { 
+  project: Project; 
+  onClick: (id: string) => void; 
+  hoverScale: number; 
+  hoverDuration: number;
+  layoutType: string;
+  layoutExitDamping: number;
+  layoutStiffness: number;
+  layoutDuration: number;
+}) {
+  const { id, title, categories, images } = project;
+  const [img1, img2, img3] = images.card;
+  
   return (
-    <button onClick={() => onClick(id)} className="block group w-full text-left cursor-pointer bg-[hsl(105,11%,96%)]">
+    <button onClick={() => onClick(id)} className="block group w-full text-left cursor-pointer bg-[hsl(105,11%,96%)] border border-[#323e45] border-solid rounded-[8px] p-4">
       <div className="content-stretch flex gap-[64px] items-end relative shrink-0 w-full">
         <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-[144px]">
           <div className="h-[20px] relative shrink-0 w-[107px]">
@@ -88,62 +107,87 @@ function PortfolioProjectCard({ id, title, onClick, hoverScale, hoverDuration }:
             </svg>
           </div>
           <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-            <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-              <p className="text-body not-italic relative shrink-0 w-[144px]">UX/UI Design</p>
-            </div>
-            <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-              <p className="text-body not-italic relative shrink-0 w-[144px]">Design Systems</p>
-            </div>
-            <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-              <p className="text-body-alt not-italic relative shrink-0 w-[144px]">Framer</p>
-            </div>
+            {categories.map((category, index) => (
+              <div key={index} className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
+                <p className={`${index === categories.length - 1 ? 'text-body-alt' : 'text-body'} not-italic relative shrink-0 w-[144px]`}>
+                  {category}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
         
         <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
           <motion.div 
             layoutId={`${id}-img-1`}
-            className="[grid-area:1_/_1] bg-stone-50 h-[178px] ml-[48px] mt-0 relative rounded-[8px] w-[285px]"
+            className="rotate-[8deg] [grid-area:1_/_1] bg-stone-50 h-[178px] ml-[48px] mt-0 relative rounded-[8px] w-[285px] overflow-hidden"
             whileHover={{ scale: hoverScale }}
-            transition={{ duration: hoverDuration }}
+            transition={{
+              scale: { duration: hoverDuration },
+              layout: layoutType === 'spring' 
+                ? { type: 'spring', damping: layoutExitDamping, stiffness: layoutStiffness }
+                : { duration: layoutDuration }
+            }}
           >
-            <div className="content-stretch flex flex-col h-[178px] items-start overflow-clip relative rounded-[inherit] w-[285px]">
-              <div className="aspect-[104/67.4783] relative shrink-0 w-full">
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  <img alt="" className="absolute h-[235.91%] left-[-11.36%] max-w-none top-[0.41%] w-[235.49%]" src={imgAttachment2} />
-                </div>
-              </div>
-            </div>
+            <img 
+              alt={img1.alt} 
+              className="w-full h-full"
+              style={{
+                objectFit: img1.objectFit || 'cover',
+                objectPosition: img1.objectPosition || 'center',
+                transform: `scale(${img1.scale || 1}) translate(${img1.translateX || '0'}, ${img1.translateY || '0'})`,
+                transformOrigin: img1.objectPosition || 'center'
+              }}
+              src={img1.src} 
+            />
             <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
           </motion.div>
           <motion.div 
             layoutId={`${id}-img-2`}
-            className="[grid-area:1_/_1] bg-stone-50 h-[178px] ml-[24px] mt-[29px] relative rounded-[8px] w-[285px]"
+            className="rotate-[4deg] [grid-area:1_/_1] bg-stone-50 h-[178px] ml-[24px] mt-[32px] relative rounded-[8px] w-[285px] overflow-hidden"
             whileHover={{ scale: hoverScale }}
-            transition={{ duration: hoverDuration }}
+            transition={{
+              scale: { duration: hoverDuration },
+              layout: layoutType === 'spring' 
+                ? { type: 'spring', damping: layoutExitDamping, stiffness: layoutStiffness }
+                : { duration: layoutDuration }
+            }}
           >
-            <div className="content-stretch flex flex-col h-[178px] items-start overflow-clip relative rounded-[inherit] w-[285px]">
-              <div className="aspect-[141.794/92]  relative shrink-0 w-full">
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  <img alt="" className="absolute h-[347.31%] left-[-16.64%] max-w-none top-[0.52%] w-[346.68%]" src={imgAttachment1} />
-                </div>
-              </div>
-            </div>
+            <img 
+              alt={img2.alt} 
+              className="w-full h-full"
+              style={{
+                objectFit: img2.objectFit || 'cover',
+                objectPosition: img2.objectPosition || 'center',
+                transform: `scale(${img2.scale || 1}) translate(${img2.translateX || '0'}, ${img2.translateY || '0'})`,
+                transformOrigin: img2.objectPosition || 'center'
+              }}
+              src={img2.src} 
+            />
             <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
           </motion.div>
           <motion.div 
             layoutId={`${id}-img-3`}
-            className="[grid-area:1_/_1] bg-stone-50 h-[178px] ml-0 mt-[57px] relative rounded-[8px] w-[285px]"
+            className="[grid-area:1_/_1] bg-stone-50 h-[178px] ml-0 mt-[57px] relative rounded-[8px] w-[285px] overflow-hidden"
             whileHover={{ scale: hoverScale }}
-            transition={{ duration: hoverDuration }}
+            transition={{
+              scale: { duration: hoverDuration },
+              layout: layoutType === 'spring' 
+                ? { type: 'spring', damping: layoutExitDamping, stiffness: layoutStiffness }
+                : { duration: layoutDuration }
+            }}
           >
-            <div className="content-stretch flex flex-col h-[178px] items-start overflow-clip relative rounded-[inherit] w-[285px]">
-              <div className="aspect-[162/105.11] relative shrink-0 w-full">
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  <img alt="" className="absolute h-[170.42%] left-[-9.25%] max-w-none top-[-0.17%] w-[170.12%]" src={imgAttachment} />
-                </div>
-              </div>
-            </div>
+            <img 
+              alt={img3.alt} 
+              className="w-full h-full"
+              style={{
+                objectFit: img3.objectFit || 'cover',
+                objectPosition: img3.objectPosition || 'center',
+                transform: `scale(${img3.scale || 1}) translate(${img3.translateX || '0'}, ${img3.translateY || '0'})`,
+                transformOrigin: img3.objectPosition || 'center'
+              }}
+              src={img3.src} 
+            />
             <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
           </motion.div>
         </div>
@@ -153,7 +197,17 @@ function PortfolioProjectCard({ id, title, onClick, hoverScale, hoverDuration }:
 }
 
 export default function HomePage({ onProjectClick }: HomePageProps) {
-  const { cardHoverScale, cardHoverDuration, buttonHoverScale, buttonHoverDuration } = useAnimationControls();
+  const { 
+    cardHoverScale, 
+    cardHoverDuration, 
+    buttonHoverScale, 
+    buttonHoverDuration,
+    layoutType,
+    layoutDamping,
+    layoutStiffness,
+    layoutExitDamping,
+    layoutDuration
+  } = useAnimationControls();
   
   return (
     <LayoutGroup>
@@ -199,8 +253,19 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
           <div className="content-stretch flex flex-col items-center gap-[40px] items-start relative shrink-0 max-w-[424px] w-full mb-20">
             <p className="text-heading not-italic relative shrink-0 md:text-xl w-full">Selected Work</p>
             <div className="content-stretch flex flex-col gap-[56px] items-start relative shrink-0 w-full">
-              <PortfolioProjectCard id="credcore" title="CredCore" onClick={onProjectClick} hoverScale={cardHoverScale} hoverDuration={cardHoverDuration} />
-              <PortfolioProjectCard id="credcore-2" title="CredCore" onClick={onProjectClick} hoverScale={cardHoverScale} hoverDuration={cardHoverDuration} />
+              {projects.map((project) => (
+                <PortfolioProjectCard 
+                  key={project.id}
+                  project={project}
+                  onClick={onProjectClick} 
+                  hoverScale={cardHoverScale} 
+                  hoverDuration={cardHoverDuration}
+                  layoutType={layoutType}
+                  layoutExitDamping={layoutExitDamping}
+                  layoutStiffness={layoutStiffness}
+                  layoutDuration={layoutDuration}
+                />
+              ))}
             </div>
           </div>
 

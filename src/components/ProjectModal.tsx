@@ -2,10 +2,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import svgPaths from '../imports/svg-navigation-paths';
-import imgAttachment from "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png";
-import imgAttachment1 from "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png";
-import imgAttachment2 from "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png";
 import { useAnimationControls } from './AnimationControls';
+import { getProjectById } from '../data/projects';
 
 // Get animation variants based on selected effect
 function getModalVariants(effect: string, scaleFrom: number, rotateFrom: number) {
@@ -67,9 +65,25 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
     layoutType,
     layoutDamping,
     layoutStiffness,
+    layoutExitDamping,
     iconButtonDuration,
     closeButtonScale
   } = useAnimationControls();
+  
+  // Get project data
+  const project = getProjectById(projectId);
+  
+  // If project not found, don't render
+  if (!project) {
+    return null;
+  }
+  
+  const { title, year, categories, longDescription, images } = project;
+  const [img1, img2, img3] = images.detail;
+  
+  // Split longDescription by double newlines to create paragraphs, filter out empty ones
+  const paragraphs = longDescription.split('\n\n').filter(p => p.trim().length > 0);
+  
   // Prevent body scroll when modal is open
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -112,6 +126,7 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
               <motion.button 
                 onClick={onClose} 
                 className="p-2 rounded-full"
+                initial={{ backgroundColor: 'transparent' }}
                 whileHover={{ scale: closeButtonScale, backgroundColor: '#ffffff' }}
                 transition={{ duration: iconButtonDuration }}
               >
@@ -120,35 +135,34 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
             </div>
 
             {/* Project Info and Description */}
-            <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start mb-32">
+            <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start justify-center mb-32">
               <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full lg:w-[180px]">
                 <div className="content-stretch flex flex-col gap-[8px] items-start leading-[28px] not-italic relative shrink-0 text-[20px] md:text-[24px] text-black tracking-[0.036px] w-full">
-                  <p className="font-semibold relative shrink-0 w-full">CredCore</p>
-                  <p className="font-display-regular relative shrink-0 w-full">2023-2025</p>
+                  <p className="font-semibold relative shrink-0 w-full">{title}</p>
+                  <p className="font-display-regular relative shrink-0 w-full">{year}</p>
                 </div>
                 
                 <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
                   <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-                    <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-                      <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">UX/UI Design</p>
-                    </div>
-                    <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-                      <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">Design Systems</p>
-                    </div>
-                    <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-                      <p className="font-display-regular leading-[26px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">Framer</p>
-                    </div>
+                    {categories.map((category, index) => (
+                      <div key={index} className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
+                        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">
+                          {category}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              <div className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 w-full lg:max-w-[940px]">
-                <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full">
-                  <div className="font-display-regular leading-[0] not-italic relative shrink-0 text-[#323e45] text-[0px] tracking-[0.036px] w-full">
-
-                    <p className="leading-[28px] text-[20px] md:text-[24px]">
-                      <span>CredCore is an AI-powered fintech platform transforming how enterprises manage complex debt agreements. <br /> <br /> Through iterative exploration, I designed and tested new ways to organize and visualize intricate financial data. In parallel, I built and maintained the platform's marketing website in Framer, ensuring design fidelity and high performance. I also created a unified design system that integrates shadcn/ui, bridging design and engineering under a refreshed brand while establishing consistent patterns across all product touchpoints.</span>
-                    </p>
+              <div className="content-stretch flex flex-col gap-[40px] items-start relative w-full lg:max-w-[720px]">
+                <div className="content-stretch flex flex-col gap-[32px] items-start relative w-full">
+                  <div className="font-display-regular leading-[0] not-italic relative shrink-0 text-[#323e45] text-[0px] tracking-[0.036px] w-full flex flex-col gap-[32px]">
+                    {paragraphs.map((paragraph, index) => (
+                      <p key={index} className="leading-[28px] text-[20px] md:text-[24px]">
+                        {paragraph}
+                      </p>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -183,57 +197,70 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
               >
                 <motion.div 
                   layoutId={`${projectId}-img-3`}
-                  transition={
-                    layoutType === 'spring' 
+                  transition={{
+                    layout: layoutType === 'spring' 
                       ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
                       : { duration: layoutDuration }
-                  }
-                  className="bg-stone-50 relative rounded-[8px]"
+                  }}
+                  className="bg-stone-50 relative rounded-[8px] overflow-hidden aspect-video"
                 >
-                  <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[inherit] w-full">
-                    <div className="aspect-[162/105.11] relative shrink-0 w-full">
-                      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                        <img alt="" className="absolute h-[170.42%] left-[-9.25%] max-w-none top-[-0.17%] w-[170.12%]" src={imgAttachment} />
-                      </div>
-                    </div>
-                  </div>
+                  <img 
+                    alt={img3.alt} 
+                    className="w-full h-full"
+                    style={{
+                      objectFit: img3.objectFit || 'none',
+                      objectPosition: img3.objectPosition || 'center',
+                      transform: `scale(${img3.scale || 1}) translate(${img3.translateX || '0'}, ${img3.translateY || '0'})`,
+                      transformOrigin: img3.objectPosition || 'center'
+                    }}
+                    src={img3.src} 
+                  />
                   <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
                 </motion.div>
                 
                 <motion.div 
                   layoutId={`${projectId}-img-2`}
-                  transition={
-                    layoutType === 'spring' 
+                  transition={{
+                    layout: layoutType === 'spring' 
                       ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
                       : { duration: layoutDuration }
-                  }
-                  className="bg-stone-50 relative rounded-[8px]"
-                  style={{ paddingBottom: 'min(64.89%, 100%)' }}
+                  }}
+                  className="bg-stone-50 relative rounded-[8px] overflow-hidden aspect-video"
                 >
-                  <div className="absolute inset-0 overflow-clip rounded-[inherit]">
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                      <img alt="" className="absolute h-[225%] left-[-16.64%] max-w-none top-[0.52%] w-[346.68%]" src={imgAttachment1} />
-                    </div>
-                  </div>
+                  <img 
+                    alt={img2.alt} 
+                    className="w-full h-full"
+                    style={{
+                      objectFit: img2.objectFit || 'none',
+                      objectPosition: img2.objectPosition || 'center',
+                      transform: `scale(${img2.scale || 1}) translate(${img2.translateX || '0'}, ${img2.translateY || '0'})`,
+                      transformOrigin: img2.objectPosition || 'center'
+                    }}
+                    src={img2.src} 
+                  />
                   <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
                 </motion.div>
                 
                 <motion.div 
                   layoutId={`${projectId}-img-1`}
-                  transition={
-                    layoutType === 'spring' 
+                  transition={{
+                    layout: layoutType === 'spring' 
                       ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
                       : { duration: layoutDuration }
-                  }
-                  className="bg-stone-50 relative rounded-[8px]"
+                  }}
+                  className="bg-stone-50 relative rounded-[8px] overflow-hidden aspect-video"
                 >
-                  <div className="content-stretch flex flex-col items-start overflow-clip relative rounded-[inherit] w-full">
-                    <div className="aspect-[104/67.4783] relative shrink-0 w-full">
-                      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                        <img alt="" className="absolute h-[138.3%] left-[0.13%] max-w-none top-[0.12%] w-[138.05%]" src={imgAttachment2} />
-                      </div>
-                    </div>
-                  </div>
+                  <img 
+                    alt={img1.alt} 
+                    className="w-full h-full"
+                    style={{
+                      objectFit: img1.objectFit || 'none',
+                      objectPosition: img1.objectPosition || 'center',
+                      transform: `scale(${img1.scale || 1}) translate(${img1.translateX || '0'}, ${img1.translateY || '0'})`,
+                      transformOrigin: img1.objectPosition || 'center'
+                    }}
+                    src={img1.src} 
+                  />
                   <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
                 </motion.div>
               </div>

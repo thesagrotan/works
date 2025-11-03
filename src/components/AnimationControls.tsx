@@ -41,8 +41,9 @@ export function useAnimationControls() {
     'Layout Transition': folder({
       layoutDuration: { value: 0.5, min: 0.3, max: 1.5, step: 0.05, label: 'Duration (s)' },
       layoutType: { value: 'spring', options: ['spring', 'tween'], label: 'Type' },
-      layoutDamping: { value: 30, min: 15, max: 40, step: 1, label: 'Spring Damping' },
+      layoutDamping: { value: 30, min: 10, max: 40, step: 1, label: 'Spring Damping (Open)' },
       layoutStiffness: { value: 250, min: 100, max: 400, step: 10, label: 'Spring Stiffness' },
+      layoutExitDamping: { value: 25, min: 5, max: 40, step: 1, label: 'Spring Damping (Close)' },
     }),
     
     // ===== Button Effects =====
@@ -55,6 +56,13 @@ export function useAnimationControls() {
     'Icon Buttons': folder({
       iconButtonDuration: { value: 0.15, min: 0.1, max: 0.5, step: 0.05, label: 'Duration (s)' },
       closeButtonScale: { value: 1.1, min: 1.0, max: 1.2, step: 0.05, label: 'Close Scale' },
+    }),
+
+    // ===== Image Controls =====
+    'Modal Images': folder({
+      imageScale: { value: 1.0, min: 0.5, max: 3.0, step: 0.05, label: 'Scale' },
+      imagePositionX: { value: 50, min: 0, max: 100, step: 1, label: 'Position X (%)' },
+      imagePositionY: { value: 50, min: 0, max: 100, step: 1, label: 'Position Y (%)' },
     }),
   });
 
