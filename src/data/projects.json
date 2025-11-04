@@ -102,7 +102,7 @@
       "longDescription": "Brand work for different companies.",
       "images": [
         {
-          "src": "/public/images/empact.jpg",
+          "src": "/public/images/Empact.jpg",
           "alt": "HealthSync Project Screenshot 1",
           "card": {
             "objectFit": "cover",
@@ -114,7 +114,7 @@
           }
         },
         {
-          "src": "/public/images/uto.jpg",
+          "src": "/public/images/Uto.jpg",
           "alt": "HealthSync Project Screenshot 2",
           "card": {
             "objectFit": "cover",
@@ -126,7 +126,7 @@
           }
         },
         {
-          "src": "/public/images/neurobrave.jpg",
+          "src": "/public/images/Neurobrave.jpg",
           "alt": "HealthSync Project Screenshot 3",
           "card": {
             "objectFit": "cover",
