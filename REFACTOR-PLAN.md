@@ -1,11 +1,11 @@
 # Refactor Plan: Code Reduction Strategy
 
 ## Executive Summary
-- **Current total lines of code:** 1,166 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [SIMPLIFY-002]
+- **Current total lines of code:** 1,056 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [SIMPLIFY-003]
 - **Target total lines of code:** 1,200
-- **Actual reduction so far:** 6,533 lines from original baseline
+- **Actual reduction so far:** 6,643 lines from original baseline
 - **Total tasks identified:** 16
-- **Tasks completed:** 7
+- **Tasks completed:** 8
 - **Functionality preserved:** 100%
 
 ## Metrics by Category
@@ -103,14 +103,15 @@ Tasks that eliminate the most code with least risk
   - **Risk:** Medium-High (modal is mission critical)
   - **Verification:** ✅ All 22 tests pass, modal.snap.test.tsx validates backdrop and content rendering, production build successful.
 
-- [ ] **[SIMPLIFY-003]** Reduce stateful logic in `PortfolioProjectCard`
-  - **File(s):** `src/components/PortfolioProjectCard.tsx`
-  - **Current LOC:** 156
-  - **Target LOC:** 90
-  - **Savings:** 66 lines (42.3%)
-  - **Strategy:** Use CSS `aspect-ratio` or a computed helper to avoid three separate ratio states, consolidate motion props, and map category badges instead of inlining repeated divs.
+- [x] **[SIMPLIFY-003]** Reduce stateful logic in `PortfolioProjectCard`
+  - **File(s):** `src/components/PortfolioProjectCard.tsx`, `src/components/HomePage.tsx`, `src/__tests__/portfolioCard.unit.test.tsx`
+  - **Previous LOC:** 156
+  - **Current LOC:** 46
+  - **Savings:** 110 lines (70.5% reduction)
+  - **Actual LOC saved:** 110 lines (completed 2025-11-04)
+  - **Strategy:** Extracted ProjectLogo helper component to eliminate verbose conditional logic, consolidated 8 animation props into single AnimationConfig object, removed redundant wrapper divs, simplified category rendering with inline mapping, eliminated aspect ratio state management (now handled by ProjectImageStack).
   - **Risk:** Medium
-  - **Verification:** Unit test updates (`portfolioCard.unit.test.tsx`), ensure hover/motion settings remain configurable via `useAnimationControls`.
+  - **Verification:** ✅ All 22 tests pass, portfolioCard.unit.test.tsx updated for new prop structure, production build successful.
 
 - [ ] **[SIMPLIFY-004]** Replace generated Tailwind base with minimal directives
   - **File(s):** `src/index.css`

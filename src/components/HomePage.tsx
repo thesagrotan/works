@@ -74,13 +74,11 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                 <PortfolioProjectCard 
                   key={project.id}
                   project={project}
-                  onClick={onProjectClick} 
-                  hoverScale={cardHoverScale} 
-                  hoverDuration={cardHoverDuration}
-                  layoutType={layoutType}
-                  layoutExitDamping={layoutExitDamping}
-                  layoutStiffness={layoutStiffness}
-                  layoutDuration={layoutDuration}
+                  onClick={onProjectClick}
+                  animation={{
+                    hover: { scale: cardHoverScale, duration: cardHoverDuration },
+                    layout: { type: layoutType, damping: layoutExitDamping, stiffness: layoutStiffness, duration: layoutDuration }
+                  }}
                 />
               ))}
             </div>

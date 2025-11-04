@@ -16,12 +16,10 @@ describe('PortfolioProjectCard', () => {
         <PortfolioProjectCard
           project={project}
           onClick={onClick}
-          hoverScale={1.05}
-          hoverDuration={0.2}
-          layoutType="spring"
-          layoutExitDamping={20}
-          layoutStiffness={300}
-          layoutDuration={0.3}
+          animation={{
+            hover: { scale: 1.05, duration: 0.2 },
+            layout: { type: 'spring', damping: 20, stiffness: 300, duration: 0.3 }
+          }}
         />
       </LayoutGroup>
     );

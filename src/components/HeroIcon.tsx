@@ -1,5 +1,5 @@
 import { motion, type MotionProps } from 'motion/react';
-import { svgPaths } from '../imports/svg-hero-paths';
+import svgPaths from '../imports/svg-hero-paths';
 
 /**
  * Valid hero icon names that can be used with the HeroIcon component.
