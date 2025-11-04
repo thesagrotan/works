@@ -55,27 +55,61 @@ const imageMap: Record<string, string> = {
   "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png": credcoreImg3,
 };
 
-// Helper function to resolve image paths from JSON to imported modules
+// Resolve public assets so they respect Vite's base (e.g., "/works/") on GitHub Pages
+function resolvePublicAssetPath(p: string): string {
+  if (!p) return p;
+  if (/^https?:\/\//i.test(p)) return p; // leave external URLs as-is
+  let s = p;
+  // Drop leading slash so we can safely prefix BASE_URL
+  if (s.startsWith('/')) s = s.slice(1);
+  // Strip explicit public/ if provided in JSON (Vite copies public/* to site root)
+  if (s.startsWith('public/')) s = s.slice('public/'.length);
+  const base = (import.meta as any).env?.BASE_URL ?? '/';
+  // Ensure base ends with exactly one slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  return normalizedBase + s;
+}
+
+// Helper function to resolve image paths from JSON to imported modules or public assets
 function resolveImagePath(imagePath: string): string {
-  return imageMap[imagePath] || imagePath;
+  // Prefer mapped figma assets
+  if (imageMap[imagePath]) return imageMap[imagePath];
+  // Handle assets referenced from public/ or absolute /images paths defined in JSON
+  if (
+    imagePath.startsWith('/public/') ||
+    imagePath.startsWith('public/') ||
+    imagePath.startsWith('/images/') ||
+    imagePath.startsWith('images/')
+  ) {
+    return resolvePublicAssetPath(imagePath);
+  }
+  return imagePath;
 }
 
 // Transform JSON data to typed projects with resolved image imports
-export const projects: Project[] = projectsData.projects.map((project) => ({
-  ...project,
-  images: {
-    card: project.images.map((img) => ({
-      src: resolveImagePath(img.src),
-      alt: img.alt,
-      ...img.card,
-    })) as [ProjectImage, ProjectImage, ProjectImage],
-    detail: project.images.map((img) => ({
-      src: resolveImagePath(img.src),
-      alt: img.alt,
-      ...img.detail,
-    })) as [ProjectImage, ProjectImage, ProjectImage],
-  },
-}));
+export const projects: Project[] = projectsData.projects.map((project) => {
+  // Resolve optional logo path too
+  const resolvedLogo = project.logo
+    ? resolvePublicAssetPath(project.logo)
+    : project.logo;
+
+  return {
+    ...project,
+    logo: resolvedLogo,
+    images: {
+      card: project.images.map((img) => ({
+        src: resolveImagePath(img.src),
+        alt: img.alt,
+        ...img.card,
+      })) as [ProjectImage, ProjectImage, ProjectImage],
+      detail: project.images.map((img) => ({
+        src: resolveImagePath(img.src),
+        alt: img.alt,
+        ...img.detail,
+      })) as [ProjectImage, ProjectImage, ProjectImage],
+    },
+  };
+});
 
 // Helper function to get project by ID
 export function getProjectById(id: string): Project | undefined {
