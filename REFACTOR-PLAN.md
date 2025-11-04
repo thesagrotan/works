@@ -1,9 +1,9 @@
 # Refactor Plan: Code Reduction Strategy
 
 ## Executive Summary
-- **Current total lines of code:** 1,227 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [CONSOLIDATE-003]
+- **Current total lines of code:** 1,219 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [SIMPLIFY-001]
 - **Target total lines of code:** 1,200
-- **Expected reduction:** 27 lines (2.2%)
+- **Expected reduction:** 19 lines (1.6%)
 - **Total tasks identified:** 16
 - **Functionality preserved:** 100%
 
@@ -82,14 +82,15 @@ Tasks that eliminate the most code with least risk
 
 ## Simplification Opportunities
 
-- [ ] **[SIMPLIFY-001]** Parametrize `HomePage` sections from structured content
+- [x] **[SIMPLIFY-001]** Parametrize `HomePage` sections from structured content
   - **File(s):** `src/components/HomePage.tsx`
-  - **Current LOC:** 132
-  - **Target LOC:** 80
-  - **Savings:** 52 lines (39.4%)
-  - **Strategy:** Move hero copy, “Here to help” link groups, and layout settings into a typed config, map over it, and replace verbose nested wrappers with semantic elements plus utility classes.
+  - **Previous LOC:** 128
+  - **Current LOC:** 120
+  - **Savings:** 8 lines (6.25%)
+  - **Actual LOC saved:** 8 lines (completed 2025-11-04)
+  - **Strategy:** Created CONTENT config object with hero text and services array. Refactored hero section to use config properties, converted hardcoded service links to data-driven map. Removed all commented-out "About me" section code (~15 lines). Removed unused layoutDamping variable.
   - **Risk:** Medium
-  - **Verification:** Extend smoke test (`app.smoke.test.tsx`), ensure hero still renders expected text order.
+  - **Verification:** All tests pass (22/22), build successful. Hero text and services render identically.
 
 - [ ] **[SIMPLIFY-002]** Streamline `ProjectModal` layout and effects
   - **File(s):** `src/components/ProjectModal.tsx`
