@@ -7,13 +7,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Derive base path for GitHub Pages deployments
 const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
-const isUserOrOrgSite = repoName.toLowerCase().endsWith('.github.io');
+const fallbackRepo = 'works'; // fallback when building locally for GH Pages
+const resolvedRepo = (repoName || fallbackRepo);
+const isUserOrOrgSite = resolvedRepo.toLowerCase().endsWith('.github.io');
+const isProd = process.env.NODE_ENV === 'production';
 
 export default defineConfig({
-  // If building on GitHub Actions for a project page, set base to "/<repo>/" automatically.
+  // For production builds (local or CI), ensure project pages use "/<repo>/" as base.
   // For user/organization pages ("<user>.github.io"), use "/".
-  // Locally, this is also "/".
-  base: repoName && !isUserOrOrgSite ? `/${repoName}/` : '/',
+  // During dev server, keep base as "/" for convenience.
+  base: isProd && resolvedRepo && !isUserOrOrgSite ? `/${resolvedRepo}/` : '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
