@@ -34,10 +34,7 @@ export default function PortfolioProjectCard({ project, onClick, animation }: Po
         <ProjectImageStack
           images={images.card}
           projectId={id}
-          layout="card"
-          hover={animation.hover}
-          transition={{ type: animation.layout.type === 'spring' ? 'spring' : 'tween', damping: animation.layout.damping, stiffness: animation.layout.stiffness, duration: animation.layout.duration }}
-          sizing={{ baseWidth: 285, maxHeight: 186 }}
+          animation={animation}
           className="mt-[-44px]"
         />
       </div>
