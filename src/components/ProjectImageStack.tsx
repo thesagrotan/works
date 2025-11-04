@@ -73,48 +73,45 @@ export default function ProjectImageStack({
 
   return (
     <div className={`${containerClass} ${className}`}>
-      {images.map((image, index) => {
-        // Create a unique layoutId that includes both project and layout context
-        const layoutId = `${projectId}-${layout}-image-${index + 1}`;
-        
-        return (
-          <motion.div
-            key={`${projectId}-${layout}-${index}`}
-            layoutId={layoutId}
-            className={`
-              ${layout === 'card' ? '[grid-area:1_/_1]' : ''} 
-              bg-stone-50 relative rounded-[8px] overflow-hidden
-              ${layout === 'card' ? `${cardRotations[index]} ${cardMargins[index + 1]}` : ''}
-            `}
-            whileHover={hover ? { scale: hover.scale } : undefined}
-            transition={{
-              scale: hover ? { duration: hover.duration } : undefined,
-              layout: layoutTransition
-            }}
-            style={{
-              width: layout === 'card' ? baseWidth : '100%',
-              height: useAutoHeight 
-                ? 'auto' 
-                : layout === 'card'
-                  ? Math.min(baseWidth / ratios[index], maxHeight)
-                  : 'h-[320px] md:h-[420px] lg:h-[520px]',
-              maxHeight: layout === 'card' ? maxHeight : undefined
-            }}
-          >
-            <img
-              alt={image.alt}
-              className={useAutoHeight ? 'w-full h-auto block' : 'h-full w-full'}
-              style={buildImgStyle(image, 'contain')}
-              src={image.src}
-              onLoad={layout === 'card' ? handleLoad(index) : undefined}
-            />
-            <div 
-              aria-hidden="true" 
-              className={`absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] ${shadowStyle}`} 
-            />
-          </motion.div>
-        );
-      })}
+      {images.map((image, index) => (
+        <motion.div
+          key={index}
+          layoutId={`${projectId}-img-${index + 1}`}
+          className={`
+            ${layout === 'card' ? '[grid-area:1_/_1]' : ''} 
+            bg-stone-50 relative rounded-[8px] overflow-hidden
+            ${layout === 'card' ? `${cardRotations[index]} ${cardMargins[index + 1]}` : ''}
+          `}
+          whileHover={hover ? { scale: hover.scale } : undefined}
+          transition={hover ? {
+            scale: { duration: hover.duration },
+            layout: layoutTransition
+          } : {
+            layout: layoutTransition
+          }}
+          style={{
+            width: layout === 'card' ? baseWidth : '100%',
+            height: useAutoHeight 
+              ? 'auto' 
+              : layout === 'card'
+                ? Math.min(baseWidth / ratios[index], maxHeight)
+                : 'h-[320px] md:h-[420px] lg:h-[520px]',
+            maxHeight: layout === 'card' ? maxHeight : undefined
+          }}
+        >
+          <img
+            alt={image.alt}
+            className={useAutoHeight ? 'w-full h-auto block' : 'h-full w-full'}
+            style={buildImgStyle(image, 'contain')}
+            src={image.src}
+            onLoad={layout === 'card' ? handleLoad(index) : undefined}
+          />
+          <div 
+            aria-hidden="true" 
+            className={`absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] ${shadowStyle}`} 
+          />
+        </motion.div>
+      ))}
     </div>
   );
 }

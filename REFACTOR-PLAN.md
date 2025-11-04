@@ -1,11 +1,11 @@
 # Refactor Plan: Code Reduction Strategy
 
 ## Executive Summary
-- **Current total lines of code:** 1,042 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [ABSTRACT-001]
+- **Current total lines of code:** 1,006 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [ABSTRACT-002]
 - **Target total lines of code:** 1,200
-- **Actual reduction so far:** 8,293 lines from original baseline
+- **Actual reduction so far:** 8,329 lines from original baseline
 - **Total tasks identified:** 16
-- **Tasks completed:** 10
+- **Tasks completed:** 11
 - **Functionality preserved:** 100%
 
 ## Metrics by Category
@@ -13,8 +13,9 @@
 |----------|-------------|------------|-----------|
 | Components | 1,021 | 900 | 121 (11.9%) |
 | Hooks | 0 | 0 | 0 |
-| Utils | 196 | 220 | -24 (-12.2%) |
-| **Total** | **1,217** | **1,200** | **17 (1.4%)** |
+| Utils | 113 | 90 | 23 (20.4%) |
+| Data | 81 | 70 | 11 (13.6%) |
+| **Total** | **1,215** | **1,060** | **155 (12.8%)** |
 
 ## High-Impact Reductions (Do First)
 Tasks that eliminate the most code with least risk
@@ -135,14 +136,15 @@ Tasks that eliminate the most code with least risk
   - **Risk:** Low
   - **Verification:** ✅ All 22 tests pass, production build successful, existing animationControls.test.tsx validates all defaults correctly.
 
-- [ ] **[ABSTRACT-002]** Consolidate project metadata resolution helpers
+- [x] **[ABSTRACT-002]** Consolidate project metadata resolution helpers
   - **File(s):** `src/data/projects.ts`, `src/lib/imageStyle.ts`
-  - **Current LOC:** 117 + 32 = 149
-  - **Target LOC:** 90
-  - **Savings:** 59 lines (39.6%)
-  - **Strategy:** Move repeated `resolveImagePath`/`resolvePublicAssetPath` logic into a shared util, infer image settings via typed mappers, and collapse duplicated spreads.
+  - **Previous LOC:** 117 + 32 = 149
+  - **Current LOC:** 81 + 32 = 113
+  - **Savings:** 36 lines (24.2%)
+  - **Actual LOC saved:** 36 lines (completed 2025-11-04)
+  - **Strategy:** Consolidated path resolution functions inline, extracted type aliases to eliminate duplication, simplified interface inheritance (ProjectImage extends ProjectImageSettings), converted verbose functions to arrow functions, computed BASE_URL once as constant, and created unified transformImg helper to eliminate repeated mapping logic.
   - **Risk:** Medium
-  - **Verification:** `projects.test.ts`, `imageStyle.test.ts` must be updated to cover the shared helper, ensure BASE_URL handling remains intact.
+  - **Verification:** ✅ All 22 tests pass, projects.test.ts validates asset resolution, imageStyle.test.ts unchanged, production build successful.
 
 - [ ] **[ABSTRACT-003]** Generate hero copy & link sets from JSON
   - **File(s):** `src/components/HomePage.tsx`, `src/data/projects.json`

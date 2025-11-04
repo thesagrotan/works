@@ -6,22 +6,19 @@ import credcoreImg1 from "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.p
 import credcoreImg2 from "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png";
 import credcoreImg3 from "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png";
 
-export interface ProjectImageSettings {
-  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
-  objectPosition?: string; // e.g., "center", "top left", "50% 50%"
-  scale?: number; // Scale multiplier (e.g., 1.5 = 150%, 0.8 = 80%)
-  translateX?: string; // Horizontal offset (e.g., "10px", "5%", "-20px")
-  translateY?: string; // Vertical offset (e.g., "10px", "5%", "-20px")
-}
+type ObjectFit = 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 
-export interface ProjectImage {
-  src: string;
-  alt: string;
-  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+export interface ProjectImageSettings {
+  objectFit?: ObjectFit;
   objectPosition?: string;
   scale?: number;
   translateX?: string;
   translateY?: string;
+}
+
+export interface ProjectImage extends ProjectImageSettings {
+  src: string;
+  alt: string;
 }
 
 export interface Project {
@@ -31,85 +28,52 @@ export interface Project {
   categories: string[];
   shortDescription?: string;
   longDescription: string;
-  // Optional per-project brand/logo asset shown in cards
-  logo?: string;
-  // Optional text to show instead of a logo image in cards
-  logoText?: string;
+  logo?: string; // Brand/logo asset for cards
+  logoText?: string; // Alternative text logo
   images: {
     card: [ProjectImage, ProjectImage, ProjectImage];
     detail: [ProjectImage, ProjectImage, ProjectImage];
   };
 }
 
-/**
- * AI_CLARIFY: Asset alias mapping policy
- * - This map intentionally resolves exactly three known figma assets to their imported modules.
- * - Any image src not listed here will pass through unchanged (fallback behavior preserved).
- * - If additional assets are introduced, extend this map behind tests (see src/__tests__/projects.test.ts)
- *   and keep behavior documented with AI_* tags per the Five Laws of Code Restructuring.
- */
-// Map of image paths to imported modules
-const imageMap: Record<string, string> = {
+// Figma asset mappings - extend behind tests (see projects.test.ts)
+const FIGMA_ASSETS: Record<string, string> = {
   "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png": credcoreImg1,
   "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png": credcoreImg2,
   "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png": credcoreImg3,
 };
 
-// Resolve public assets so they respect Vite's base (e.g., "/works/") on GitHub Pages
-function resolvePublicAssetPath(p: string): string {
-  if (!p) return p;
-  if (/^https?:\/\//i.test(p)) return p; // leave external URLs as-is
-  let s = p;
-  // Drop leading slash so we can safely prefix BASE_URL
-  if (s.startsWith('/')) s = s.slice(1);
-  // Strip explicit public/ if provided in JSON (Vite copies public/* to site root)
-  if (s.startsWith('public/')) s = s.slice('public/'.length);
-  const base = (import.meta as any).env?.BASE_URL ?? '/';
-  // Ensure base ends with exactly one slash
-  const normalizedBase = base.endsWith('/') ? base : base + '/';
-  return normalizedBase + s;
-}
+const BASE_URL = (() => {
+  const b = (import.meta as any).env?.BASE_URL ?? '/';
+  return b.endsWith('/') ? b : b + '/';
+})();
 
-// Helper function to resolve image paths from JSON to imported modules or public assets
-function resolveImagePath(imagePath: string): string {
-  // Prefer mapped figma assets
-  if (imageMap[imagePath]) return imageMap[imagePath];
-  // Handle assets referenced from public/ or absolute /images paths defined in JSON
-  if (
-    imagePath.startsWith('/public/') ||
-    imagePath.startsWith('public/') ||
-    imagePath.startsWith('/images/') ||
-    imagePath.startsWith('images/')
-  ) {
-    return resolvePublicAssetPath(imagePath);
-  }
-  return imagePath;
-}
+// Resolve public assets (respects Vite BASE_URL)
+const resolvePath = (p: string): string => {
+  if (!p || /^https?:\/\//i.test(p)) return p;
+  return BASE_URL + p.replace(/^\//, '').replace(/^public\//, '');
+};
+
+// Resolve image (figma asset, public asset, or pass-through)
+const resolveImg = (path: string): string =>
+  FIGMA_ASSETS[path] || (path.match(/^\/?(?:public|images)\//) ? resolvePath(path) : path);
+
+// Transform image with context (card/detail)
+const transformImg = (img: any, ctx: 'card' | 'detail'): ProjectImage => ({
+  src: resolveImg(img.src),
+  alt: img.alt,
+  ...img[ctx],
+});
 
 // Transform JSON data to typed projects with resolved image imports
-export const projects: Project[] = projectsData.projects.map((project) => {
-  // Resolve optional logo path too
-  const resolvedLogo = project.logo
-    ? resolvePublicAssetPath(project.logo)
-    : project.logo;
-
-  return {
-    ...project,
-    logo: resolvedLogo,
-    images: {
-      card: project.images.map((img) => ({
-        src: resolveImagePath(img.src),
-        alt: img.alt,
-        ...img.card,
-      })) as [ProjectImage, ProjectImage, ProjectImage],
-      detail: project.images.map((img) => ({
-        src: resolveImagePath(img.src),
-        alt: img.alt,
-        ...img.detail,
-      })) as [ProjectImage, ProjectImage, ProjectImage],
-    },
-  };
-});
+export const projects: Project[] = projectsData.projects.map((project) => ({
+  ...project,
+  logo: project.logo ? resolvePath(project.logo) : project.logo,
+  images: {
+    card: project.images.map((img) => transformImg(img, 'card')) as [ProjectImage, ProjectImage, ProjectImage],
+    detail: project.images.map((img) => transformImg(img, 'detail')) as [ProjectImage, ProjectImage, ProjectImage],
+  },
+}));
 
 // Helper function to get project by ID
 export function getProjectById(id: string): Project | undefined {
