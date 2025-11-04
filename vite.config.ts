@@ -5,10 +5,15 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Derive base path for GitHub Pages deployments
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const isUserOrOrgSite = repoName.toLowerCase().endsWith('.github.io');
+
 export default defineConfig({
   // If building on GitHub Actions for a project page, set base to "/<repo>/" automatically.
-  // Locally (or for user/organization pages), this falls back to "/".
-  base: process.env.GITHUB_REPOSITORY ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/` : '/',
+  // For user/organization pages ("<user>.github.io"), use "/".
+  // Locally, this is also "/".
+  base: repoName && !isUserOrOrgSite ? `/${repoName}/` : '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
