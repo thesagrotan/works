@@ -8,7 +8,8 @@ export default function App() {
 
   return (
     <>
-      <Leva collapsed={false} />
+      {/* Hide Leva controls UI by default; toggle via env if needed */}
+      <Leva hidden collapsed />
       <HomePage onProjectClick={setSelectedProject} />
       {selectedProject && (
         <ProjectModal 

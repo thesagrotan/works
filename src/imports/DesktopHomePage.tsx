@@ -586,7 +586,7 @@ function Frame1000006077() {
 
 function Frame1000003443() {
   return (
-    <div className="content-stretch flex flex-col items-start relative shrink-0 w-[207px]">
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-[200px]">
       <ProjectLink label="Product Design " />
       <ProjectLink label="Web Design " />
       <ProjectLink label="Visual Identity" />
@@ -596,7 +596,7 @@ function Frame1000003443() {
 
 function Frame1000003444() {
   return (
-    <div className="content-stretch flex flex-col items-start relative shrink-0 w-[207px]">
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-[200px]">
       <ProjectLink label="Design Systems" />
       <ProjectLink label="Framer" />
       <ProjectLink label="Prototypes" />

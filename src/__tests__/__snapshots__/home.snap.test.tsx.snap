@@ -12,6 +12,6 @@ exports[`HomePage baseline snapshot > captures stable DOM semantics for Selected
     false,
     false,
   ],
-  "selectedWorkProjects": 4,
+  "selectedWorkProjects": 3,
 }
 `;

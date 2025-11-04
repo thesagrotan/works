@@ -164,13 +164,13 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                       ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
                       : { duration: layoutDuration }
                   }}
-                  className="bg-stone-50 relative rounded-[8px] overflow-hidden aspect-video"
+                  className="bg-stone-50 relative rounded-[8px] overflow-hidden h-[320px] md:h-[420px] lg:h-[520px]"
                 >
                   <img 
                     alt={img3.alt} 
-                    className="w-full h-full"
-                    // AI_GOOD: Use centralized builder; modal fallbackFit='none' to match original default here
-                    style={buildImgStyle(img3, 'none')}
+                    className="h-full w-full"
+                    // Constrain both axes so object-fit/object-position can take effect
+                    style={buildImgStyle(img3, 'contain')}
                     src={img3.src} 
                   />
                   <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
@@ -183,13 +183,13 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                       ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
                       : { duration: layoutDuration }
                   }}
-                  className="bg-stone-50 relative rounded-[8px] overflow-hidden aspect-video"
+                  className="bg-stone-50 relative rounded-[8px] overflow-hidden h-[320px] md:h-[420px] lg:h-[520px]"
                 >
                   <img 
                     alt={img2.alt} 
-                    className="w-full h-full"
-                    // AI_GOOD: Centralized style builder with identical output; fallbackFit='none'
-                    style={buildImgStyle(img2, 'none')}
+                    className="h-full w-full"
+                    // Constrain both axes so object-fit/object-position can take effect
+                    style={buildImgStyle(img2, 'contain')}
                     src={img2.src} 
                   />
                   <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
@@ -202,13 +202,13 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                       ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
                       : { duration: layoutDuration }
                   }}
-                  className="bg-stone-50 relative rounded-[8px] overflow-hidden aspect-video"
+                  className="bg-stone-50 relative rounded-[8px] overflow-hidden h-[320px] md:h-[420px] lg:h-[520px]"
                 >
                   <img 
                     alt={img1.alt} 
-                    className="w-full h-full"
-                    // AI_GOOD: Centralized style builder with identical output; fallbackFit='none'
-                    style={buildImgStyle(img1, 'none')}
+                    className="h-full w-full"
+                    // Constrain both axes so object-fit/object-position can take effect
+                    style={buildImgStyle(img1, 'contain')}
                     src={img1.src} 
                   />
                   <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />

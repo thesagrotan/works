@@ -15,8 +15,8 @@
             "objectPosition": "center"
           },
           "detail": {
-            "objectFit": "none",
-            "objectPosition": "center"
+            "objectFit": "cover",
+            "objectPosition": "left top"
           }
         },
         {
@@ -27,8 +27,8 @@
             "objectPosition": "center"
           },
           "detail": {
-            "objectFit": "none",
-            "objectPosition": "center"
+            "objectFit": "cover",
+            "objectPosition": "left top"
           }
         },
         {
@@ -42,7 +42,7 @@
             "translateY": "0"
           },
           "detail": {
-            "objectFit": "none",
+            "objectFit": "cover",
             "objectPosition": "center"
           }
         }
@@ -50,138 +50,93 @@
     },
     {
       "id": "mobility-platform",
-      "title": "Urban Mobility",
+      "title": "Queue",
       "year": "2022-2023",
       "categories": ["Product Design", "Mobile App", "User Research"],
-      "longDescription": "Urban Mobility is a comprehensive transportation platform that connects users with various mobility options in urban environments. I led the design of the mobile application, focusing on creating an intuitive booking experience and real-time tracking system. The project involved extensive user research, prototyping, and usability testing to ensure the solution met diverse user needs across different demographics and use cases.",
+      "longDescription": "Queue helps you establish expert authority by providing precise responses to questions from high-intent audiences.\n\n This redesign improves usability with a streamlined, user-friendly interface and introduces a distinctive ranking meter that creates a consistent and recognizable signature across the company’s tools.",
       "images": [
         {
-          "src": "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png",
+          "src": "/public/images/Q3.jpg",
           "alt": "Urban Mobility Project Screenshot 1",
           "card": {
             "objectFit": "cover",
-            "objectPosition": "center"
+            "objectPosition": "right top"
           },
           "detail": {
-            "objectFit": "none",
-            "objectPosition": "center"
+            "objectFit": "cover",
+            "objectPosition": "left top"
           }
         },
         {
-          "src": "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png",
+          "src": "/public/images/Q2.jpg",
           "alt": "Urban Mobility Project Screenshot 2",
           "card": {
             "objectFit": "cover",
-            "objectPosition": "center"
+            "objectPosition": "right top"
           },
           "detail": {
-            "objectFit": "none",
-            "objectPosition": "center"
+            "objectFit": "cover",
+            "objectPosition": "left top"
           }
         },
         {
-          "src": "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png",
+          "src": "/public/images/Q1.jpg",
           "alt": "Urban Mobility Project Screenshot 3",
           "card": {
             "objectFit": "cover",
-            "objectPosition": "center"
+            "objectPosition": "left top"
           },
           "detail": {
-            "objectFit": "none",
-            "objectPosition": "center"
+            "objectFit": "cover",
+            "objectPosition": "left top"
           }
         }
       ]
     },
     {
       "id": "healthtech-dashboard",
-      "title": "HealthSync",
-      "year": "2021-2022",
-      "categories": ["Dashboard Design", "Data Visualization", "Web App"],
-      "longDescription": "HealthSync is a digital health platform designed for medical professionals to monitor patient vitals and health metrics in real-time. I designed the dashboard interface with a focus on data clarity and quick decision-making. The project required balancing complex medical data with an interface that could be used efficiently in high-pressure clinical environments. I created custom data visualizations and established design patterns that prioritize critical information.",
+      "title": "Brand Identities",
+      "categories": [],
+      "longDescription": "Brand work for different companies.",
       "images": [
         {
-          "src": "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png",
+          "src": "/public/images/empact.jpg",
           "alt": "HealthSync Project Screenshot 1",
           "card": {
             "objectFit": "cover",
             "objectPosition": "center"
           },
           "detail": {
-            "objectFit": "none",
+            "objectFit": "cover",
             "objectPosition": "center"
           }
         },
         {
-          "src": "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png",
+          "src": "/public/images/uto.jpg",
           "alt": "HealthSync Project Screenshot 2",
           "card": {
             "objectFit": "cover",
             "objectPosition": "center"
           },
           "detail": {
-            "objectFit": "none",
+            "objectFit": "cover",
             "objectPosition": "center"
           }
         },
         {
-          "src": "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png",
+          "src": "/public/images/neurobrave.jpg",
           "alt": "HealthSync Project Screenshot 3",
           "card": {
             "objectFit": "cover",
             "objectPosition": "center"
           },
           "detail": {
-            "objectFit": "none",
-            "objectPosition": "center"
-          }
-        }
-      ]
-    },
-    {
-      "id": "defi-wallet",
-      "title": "CryptoVault",
-      "year": "2020-2021",
-      "categories": ["Crypto Wallet", "Web3 Design", "Security UI"],
-      "longDescription": "CryptoVault is a decentralized finance (DeFi) wallet application that prioritizes security and ease of use. I designed the entire user experience from onboarding to advanced trading features, making complex blockchain interactions accessible to users of varying technical expertise. The design system emphasizes trust and transparency, with clear visual feedback for all transactions and security-critical actions.",
-      "images": [
-        {
-          "src": "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png",
-          "alt": "CryptoVault Project Screenshot 1",
-          "card": {
             "objectFit": "cover",
-            "objectPosition": "center"
-          },
-          "detail": {
-            "objectFit": "none",
-            "objectPosition": "center"
-          }
-        },
-        {
-          "src": "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png",
-          "alt": "CryptoVault Project Screenshot 2",
-          "card": {
-            "objectFit": "cover",
-            "objectPosition": "center"
-          },
-          "detail": {
-            "objectFit": "none",
-            "objectPosition": "center"
-          }
-        },
-        {
-          "src": "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png",
-          "alt": "CryptoVault Project Screenshot 3",
-          "card": {
-            "objectFit": "cover",
-            "objectPosition": "center"
-          },
-          "detail": {
-            "objectFit": "none",
             "objectPosition": "center"
           }
         }
       ]
     }
+
   ]
 }
