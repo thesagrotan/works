@@ -16,6 +16,15 @@ export interface ProjectImageSettings {
   translateY?: string;
 }
 
+// Default image settings - applied when not explicitly specified
+const DEFAULT_IMAGE_SETTINGS: Required<ProjectImageSettings> = {
+  objectFit: 'cover',
+  objectPosition: 'center',
+  scale: 1,
+  translateX: '0',
+  translateY: '0',
+};
+
 export interface ProjectImage extends ProjectImageSettings {
   src: string;
   alt: string;
@@ -58,10 +67,11 @@ const resolvePath = (p: string): string => {
 const resolveImg = (path: string): string =>
   FIGMA_ASSETS[path] || (path.match(/^\/?(?:public|images)\//) ? resolvePath(path) : path);
 
-// Transform image with context (card/detail)
+// Transform image with context (card/detail), applying defaults for omitted settings
 const transformImg = (img: any, ctx: 'card' | 'detail'): ProjectImage => ({
   src: resolveImg(img.src),
   alt: img.alt,
+  ...DEFAULT_IMAGE_SETTINGS,
   ...img[ctx],
 });
 

@@ -10,41 +10,24 @@
         {
           "src": "figma:asset/9f9d823d9cb3790fd8d4d58478235c3f7a1e4355.png",
           "alt": "CredCore Project Screenshot 2",
-          "card": {
-            "objectFit": "cover",
-            "objectPosition": "center"
-          },
-          "detail": {
-            "objectFit": "cover",
-            "objectPosition": "left top"
-          }
+          "card": {},
+          "detail": { "objectPosition": "left top" }
         },
         {
           "src": "figma:asset/134c3db483b4b26b18d1476639bb29eed1406f6e.png",
           "alt": "CredCore Project Screenshot 1",
-          "card": {
-            "objectFit": "cover",
-            "objectPosition": "center"
-          },
-          "detail": {
-            "objectFit": "cover",
-            "objectPosition": "left top"
-          }
+          "card": {},
+          "detail": { "objectPosition": "left top" }
         },
         {
           "src": "figma:asset/975174df45461a4ebd49039bd564317f1bdd66f8.png",
           "alt": "CredCore Project Screenshot 3",
           "card": {
-            "objectFit": "cover",
             "objectPosition": "left top",
             "scale": 2,
-            "translateX": "-6%",
-            "translateY": "0"
+            "translateX": "-6%"
           },
-          "detail": {
-            "objectFit": "cover",
-            "objectPosition": "left top"
-          }
+          "detail": { "objectPosition": "left top" }
         }
       ]
     },
@@ -59,38 +42,20 @@
         {
           "src": "/public/images/Q3.jpg",
           "alt": "Urban Mobility Project Screenshot 1",
-          "card": {
-            "objectFit": "cover",
-            "objectPosition": "right top"
-          },
-          "detail": {
-            "objectFit": "cover",
-            "objectPosition": "left top"
-          }
+          "card": { "objectPosition": "right top" },
+          "detail": { "objectPosition": "left top" }
         },
         {
           "src": "/public/images/Q2.jpg",
           "alt": "Urban Mobility Project Screenshot 2",
-          "card": {
-            "objectFit": "cover",
-            "objectPosition": "right top"
-          },
-          "detail": {
-            "objectFit": "cover",
-            "objectPosition": "left top"
-          }
+          "card": { "objectPosition": "right top" },
+          "detail": { "objectPosition": "left top" }
         },
         {
           "src": "/public/images/Q1.jpg",
           "alt": "Urban Mobility Project Screenshot 3",
-          "card": {
-            "objectFit": "cover",
-            "objectPosition": "left top"
-          },
-          "detail": {
-            "objectFit": "cover",
-            "objectPosition": "left top"
-          }
+          "card": { "objectPosition": "left top" },
+          "detail": { "objectPosition": "left top" }
         }
       ]
     },
@@ -104,38 +69,20 @@
         {
           "src": "/public/images/Empact.jpg",
           "alt": "HealthSync Project Screenshot 1",
-          "card": {
-            "objectFit": "cover",
-            "objectPosition": "center"
-          },
-          "detail": {
-            "objectFit": "cover",
-            "objectPosition": "center"
-          }
+          "card": {},
+          "detail": {}
         },
         {
           "src": "/public/images/Uto.jpg",
           "alt": "HealthSync Project Screenshot 2",
-          "card": {
-            "objectFit": "cover",
-            "objectPosition": "center"
-          },
-          "detail": {
-            "objectFit": "cover",
-            "objectPosition": "center"
-          }
+          "card": {},
+          "detail": {}
         },
         {
           "src": "/public/images/Neurobrave.jpg",
           "alt": "HealthSync Project Screenshot 3",
-          "card": {
-            "objectFit": "cover",
-            "objectPosition": "center"
-          },
-          "detail": {
-            "objectFit": "cover",
-            "objectPosition": "center"
-          }
+          "card": {},
+          "detail": {}
         }
       ]
     }
