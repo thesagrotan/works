@@ -1,11 +1,11 @@
 # Refactor Plan: Code Reduction Strategy
 
 ## Executive Summary
-- **Current total lines of code:** 1,006 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [ABSTRACT-002]
+- **Current total lines of code:** 979 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [PRUNE-001]
 - **Target total lines of code:** 1,200
-- **Actual reduction so far:** 8,329 lines from original baseline
+- **Actual reduction so far:** 8,356 lines from original baseline
 - **Total tasks identified:** 16
-- **Tasks completed:** 11
+- **Tasks completed:** 12
 - **Functionality preserved:** 100%
 
 ## Metrics by Category
@@ -157,14 +157,15 @@ Tasks that eliminate the most code with least risk
 
 ## Dead Code Removal
 
-- [ ] **[PRUNE-001]** Delete unused `ImageWithFallback`
+- [x] **[PRUNE-001]** Delete unused `ImageWithFallback`
   - **File(s):** `src/components/figma/ImageWithFallback.tsx`
-  - **Current LOC:** 27
+  - **Current LOC:** 0 (was 27)
   - **Target LOC:** 0
   - **Savings:** 27 lines (100%)
-  - **Strategy:** Confirm no references (already none), drop file & adjust build outputs.
+  - **Actual LOC saved:** 27 lines (completed 2025-11-04)
+  - **Strategy:** Confirmed no references via grep, deleted file.
   - **Risk:** Low
-  - **Verification:** Lint, type-check.
+  - **Verification:** ✅ All 22 tests pass, production build successful.
 
 - [x] **[PRUNE-002]** Remove dormant `use-mobile` hook
   - **File(s):** `src/components/ui/use-mobile.ts`
