@@ -3,17 +3,13 @@ import InfiniteCarousel from './InfiniteCarousel';
 import PortfolioProjectCard from './PortfolioProjectCard';
 import { useAnimationControls } from './AnimationControls';
 import { projects } from '../data/projects';
+import { siteContent, parseBold } from '../data/siteContent';
 import ProjectLink from './ProjectLink';
 import BrandLogo from './BrandLogo';
 
 interface HomePageProps {
   onProjectClick: (projectId: string) => void;
 }
-
-const HELP_LINKS = [
-  ['Product Design ', 'Web Design ', 'Visual Identity'],
-  ['Design Systems', 'Framer', 'Prototypes'],
-];
 
 export default function HomePage({ onProjectClick }: HomePageProps) {
   const { 
@@ -36,24 +32,22 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
           <BrandLogo />
           <div className="max-w-[424px] flex flex-col gap-12">
             <div className="flex flex-col gap-8 text-primary text-xs md:text-xl tracking-sm leading-none">
-              <p className="text-hero">
-                <span>{`I'm Daniel Campagne, `}</span>
-                <span className="font-semibold">{`a product designer `}</span>
-                who transforms complex systems into intuitive experiences while helping brands tell their stories effectively.
-              </p>
-              <p className="text-hero font-bold whitespace-pre-wrap">
-                <span className="font-semibold">With over 15 years of experience</span>
-                <span className="font-regular">{` for the last years helping startups on b2b and b2c solutions  in the areas fo mobility, fintech, DeFi, and digital health.`}</span>
-              </p>
+              {[siteContent.hero.intro, siteContent.hero.experience].map((text, idx) => (
+                <p key={idx} className={`text-hero ${idx === 1 ? 'font-bold whitespace-pre-wrap' : ''}`}>
+                  {parseBold(text).map(({ text: t, bold, key }) => (
+                    <span key={key} className={bold ? 'font-semibold' : 'font-regular'}>{t}</span>
+                  ))}
+                </p>
+              ))}
             </div>
             <motion.a
-              href="mailto:dcampagne@gmail.com"
+              href={`mailto:${siteContent.hero.email}`}
               aria-label="Email Daniel"
               className="bg-stone-800 flex px-[18px] py-[15px] rounded-lg shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] cursor-pointer"
               whileHover={{ scale: buttonHoverScale, backgroundColor: '#44403c' }}
               transition={{ duration: buttonHoverDuration }}
             >
-              <p className="text-button text-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>Get in touch</p>
+              <p className="text-button text-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>{siteContent.hero.cta}</p>
             </motion.a>
           </div>
         </section>
@@ -68,7 +62,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
         {/* Selected Work */}
         <section className="max-w-[1200px] mx-auto flex flex-col items-center">
           <div className="flex flex-col gap-10 max-w-[424px] w-full mb-20">
-            <h2 className="text-heading md:text-xl mb-12">Selected Work</h2>
+            <h2 className="text-heading md:text-xl mb-12">{siteContent.selectedWork}</h2>
             <div className="flex flex-col gap-[88px]">
               {projects.map((project) => (
                 <PortfolioProjectCard 
@@ -86,9 +80,9 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
 
           {/* Here to help you with */}
           <div className="mb-20 max-w-[420px]">
-            <h2 className="text-heading md:text-xl mb-8">Here to help you with...</h2>
+            <h2 className="text-heading md:text-xl mb-8">{siteContent.helpWith.heading}</h2>
             <div className="flex flex-wrap gap-x-8 gap-y-4">
-              {HELP_LINKS.map((column, idx) => (
+              {siteContent.helpWith.links.map((column, idx) => (
                 <div key={idx} className="flex flex-col w-[194px]">
                   {column.map((label) => <ProjectLink key={label} label={label} />)}
                 </div>

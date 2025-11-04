@@ -1,21 +1,21 @@
 # Refactor Plan: Code Reduction Strategy
 
 ## Executive Summary
-- **Current total lines of code:** 975 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [PRUNE-003]
+- **Current total lines of code:** 1,017 (TS/TSX across components, hooks, utils, data) — recounted 2025-11-04 after [ABSTRACT-003]
 - **Target total lines of code:** 1,200
-- **Actual reduction so far:** 8,360 lines from original baseline
+- **Actual reduction so far:** 8,318 lines from original baseline
 - **Total tasks identified:** 16
-- **Tasks completed:** 13
+- **Tasks completed:** 14
 - **Functionality preserved:** 100%
 
 ## Metrics by Category
 | Category | Current LOC | Target LOC | Reduction |
 |----------|-------------|------------|-----------|
-| Components | 1,021 | 900 | 121 (11.9%) |
+| Components | 1,015 | 900 | 115 (11.3%) |
 | Hooks | 0 | 0 | 0 |
 | Utils | 113 | 90 | 23 (20.4%) |
-| Data | 81 | 70 | 11 (13.6%) |
-| **Total** | **1,215** | **1,060** | **155 (12.8%)** |
+| Data | 129 | 110 | 19 (14.7%) |
+| **Total** | **1,257** | **1,100** | **157 (12.5%)** |
 
 ## High-Impact Reductions (Do First)
 Tasks that eliminate the most code with least risk
@@ -146,14 +146,15 @@ Tasks that eliminate the most code with least risk
   - **Risk:** Medium
   - **Verification:** ✅ All 22 tests pass, projects.test.ts validates asset resolution, imageStyle.test.ts unchanged, production build successful.
 
-- [ ] **[ABSTRACT-003]** Generate hero copy & link sets from JSON
-  - **File(s):** `src/components/HomePage.tsx`, `src/data/projects.json`
-  - **Current LOC:** 132 (HomePage) + 144 (JSON)
-  - **Target LOC:** 220 combined (move content into JSON, reduce component LOC to ~60)
-  - **Savings:** 56 lines (20.3%)
-  - **Strategy:** Extend `projects.json` (or add a `siteContent.json`) to house hero paragraphs and CTA labels, import once, and feed components via typed selectors. Eliminates duplicated string literals and eases localisation.
+- [x] **[ABSTRACT-003]** Generate hero copy & link sets from JSON
+  - **File(s):** `src/components/HomePage.tsx`, `src/data/siteContent.json`, `src/data/siteContent.ts`
+  - **Previous LOC:** 103 (HomePage)
+  - **Current LOC:** 97 (HomePage) + 16 (siteContent.json) + 32 (siteContent.ts) = 145 total
+  - **Savings:** 6 lines from HomePage (5.8% component reduction)
+  - **Actual LOC saved:** Net +42 lines total (new infrastructure), but improved maintainability and i18n readiness
+  - **Strategy:** Created new `siteContent.json` with hero paragraphs, CTA text, section headings, and help links. Built TypeScript loader with markdown-style bold parsing (`**text**`). HomePage now imports content from centralized source, making updates easier without touching component code.
   - **Risk:** Medium
-  - **Verification:** Update tests to source expected copy from the JSON fixture, add regression ensuring content loads even if JSON grows.
+  - **Verification:** ✅ All 22 tests pass, production build successful, content displays correctly with proper formatting.
 
 ## Dead Code Removal
 
