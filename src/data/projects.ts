@@ -27,10 +27,12 @@ export interface ProjectImage {
 export interface Project {
   id: string;
   title: string;
-  year: string;
+  year?: string;
   categories: string[];
   shortDescription?: string;
   longDescription: string;
+  // Optional per-project brand/logo asset shown in cards
+  logo?: string;
   images: {
     card: [ProjectImage, ProjectImage, ProjectImage];
     detail: [ProjectImage, ProjectImage, ProjectImage];

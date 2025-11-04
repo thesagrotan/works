@@ -43,7 +43,7 @@
           },
           "detail": {
             "objectFit": "cover",
-            "objectPosition": "center"
+            "objectPosition": "left top"
           }
         }
       ]
@@ -52,6 +52,7 @@
       "id": "mobility-platform",
       "title": "Queue",
       "year": "2022-2023",
+      "logo": "/public/images/queue.svg",
       "categories": ["Product Design", "Mobile App", "User Research"],
       "longDescription": "Queue helps you establish expert authority by providing precise responses to questions from high-intent audiences.\n\n This redesign improves usability with a streamlined, user-friendly interface and introduces a distinctive ranking meter that creates a consistent and recognizable signature across the company’s tools.",
       "images": [

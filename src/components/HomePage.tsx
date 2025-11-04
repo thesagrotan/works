@@ -46,7 +46,9 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                   <span className="font-semibold not-italic">With over 15 years of experience</span> <span className="font-regular not-italic">{`for the last years helping startups on b2b and b2c solutions  in the areas fo mobility, fintech, DeFi, and digital health.`}</span>
                 </p>
               </div>
-              <motion.div 
+              <motion.a
+                href="mailto:dcampagne@gmail.com"
+                aria-label="Email Daniel"
                 className="bg-stone-800 box-border content-stretch flex gap-[13px] items-start px-[18px] py-[15px] relative rounded-[8px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer"
                 whileHover={{ scale: buttonHoverScale, backgroundColor: '#44403c' }}
                 transition={{ duration: buttonHoverDuration }}
@@ -54,7 +56,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
                 <div className="flex flex-col justify-center leading-none relative shrink-0 text-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
                   <p className="text-button whitespace-pre">Get in touch</p>
                 </div>
-              </motion.div>
+              </motion.a>
             </div>
           </div>
         </div>
@@ -69,7 +71,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
         {/* Selected Work */}
         <div className="max-w-[1200px] mx-auto flex flex-col justify-center items-center">
           <div className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 max-w-[424px] w-full mb-20">
-            <p className="text-heading not-italic relative shrink-0 md:text-xl w-full">Selected Work</p>
+            <p className="text-heading not-italic relative shrink-0 md:text-xl w-full mb-12">Selected Work</p>
             <div className="content-stretch flex flex-col gap-[88px] items-start relative shrink-0 w-full">
               {projects.map((project) => (
                 <PortfolioProjectCard 
@@ -112,7 +114,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
               <p className="text-heading relative shrink-0 md:text-xl w-full">About me</p>
               <p className="text-hero relative shrink-0 w-full">I approach projects from a tactical standpoint and make decisions based on my intuition</p>
             </div> */}
-            <motion.div 
+            {/* <motion.div 
               className="bg-stone-800 box-border content-stretch flex gap-[13px] items-center justify-center px-[18px] py-[15px] relative rounded-[8px] shadow-[0px_76px_21px_0px_rgba(47,62,70,0),0px_49px_20px_0px_rgba(47,62,70,0.02),0px_27px_16px_0px_rgba(47,62,70,0.08),0px_12px_12px_0px_rgba(47,62,70,0.13),0px_3px_7px_0px_rgba(47,62,70,0.15)] shrink-0 cursor-pointer"
               whileHover={{ scale: buttonHoverScale, backgroundColor: '#44403c' }}
               transition={{ duration: buttonHoverDuration }}
@@ -120,7 +122,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
               <div className="flex flex-col items-center justify-center leading-none relative shrink-0 text-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
                 <p className="text-button whitespace-pre text-center">Get in touch</p>
               </div>
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
       </div>
