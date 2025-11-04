@@ -4,15 +4,48 @@ import { ArrowLeft } from 'lucide-react';
 import svgPaths from '../imports/svg-navigation-paths';
 import { useAnimationControls } from './AnimationControls';
 import { getProjectById } from '../data/projects';
-import { getModalVariants } from '../animation/modalVariants'; // AI_GOOD: Using extracted function preserves behavior and return shape.
+import { getModalVariants } from '../animation/modalVariants';
 import { buildImgStyle } from '../lib/imageStyle';
-
-// AI_GOOD: getModalVariants moved to src/animation/modalVariants.ts with identical cases and defaults.
+import type { ProjectImage } from '../data/projects';
 
 interface ProjectModalProps {
   projectId: string;
   onClose: () => void;
 }
+
+// Shared image container component to eliminate repetition
+const ModalImage = ({ 
+  image, 
+  projectId, 
+  index,
+  isSingleColumn,
+  layoutTransition 
+}: { 
+  image: ProjectImage;
+  projectId: string;
+  index: number;
+  isSingleColumn: boolean;
+  layoutTransition: object;
+}) => (
+  <motion.div 
+    layoutId={`${projectId}-img-${index + 1}`}
+    transition={{ layout: layoutTransition }}
+    className={`bg-stone-50 relative rounded-lg overflow-hidden ${
+      isSingleColumn ? 'h-auto' : 'h-[320px] md:h-[420px] lg:h-[520px]'
+    }`}
+  >
+    <img 
+      alt={image.alt} 
+      className={isSingleColumn ? 'w-full h-auto block' : 'h-full w-full'}
+      style={buildImgStyle(image, 'contain')}
+      src={image.src} 
+    />
+    <div 
+      aria-hidden="true" 
+      className="absolute border border-stone-800 inset-0 pointer-events-none rounded-lg shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" 
+    />
+  </motion.div>
+);
 
 export default function ProjectModal({ projectId, onClose }: ProjectModalProps) {
   const { 
@@ -27,25 +60,9 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
     layoutType,
     layoutDamping,
     layoutStiffness,
-    layoutExitDamping,
     iconButtonDuration,
     closeButtonScale
   } = useAnimationControls();
-  
-  // Get project data
-  const project = getProjectById(projectId);
-  
-  // If project not found, don't render
-  if (!project) {
-    return null;
-  }
-  
-  const { title, year, categories, longDescription, images } = project;
-  const [img1, img2, img3] = images.detail;
-  const isSingleColumnProject = projectId === 'healthtech-dashboard';
-  
-  // Split longDescription by double newlines to create paragraphs, filter out empty ones
-  const paragraphs = longDescription.split('\n\n').filter(p => p.trim().length > 0);
   
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -63,6 +80,18 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
     window.addEventListener('keydown', handleEscape);
     return () => window.removeEventListener('keydown', handleEscape);
   }, [onClose]);
+  
+  const project = getProjectById(projectId);
+  
+  if (!project) return null;
+  
+  const { title, year, categories, longDescription, images } = project;
+  const [img1, img2, img3] = images.detail;
+  const isSingleColumnProject = projectId === 'healthtech-dashboard';
+  const layoutTransition = layoutType === 'spring' 
+    ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
+    : { duration: layoutDuration };
+  const paragraphs = longDescription.split('\n\n').filter(p => p.trim().length > 0);
 
   return (
     <AnimatePresence>
@@ -99,123 +128,48 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
 
             {/* Project Info and Description */}
             <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start justify-center mb-32">
-              <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full lg:w-[180px]">
-                <div className="content-stretch flex flex-col gap-[8px] items-start leading-[28px] not-italic relative shrink-0 text-[20px] md:text-[24px] text-black tracking-[0.036px] w-full">
-                  <p className="font-semibold relative shrink-0 w-full">{title}</p>
-                  <p className="font-display-regular relative shrink-0 w-full">{year}</p>
+              <div className="flex flex-col gap-6 w-full lg:w-45">
+                <div className="flex flex-col gap-2 text-xl md:text-2xl leading-7">
+                  <p className="font-semibold text-black">{title}</p>
+                  <p className="font-display-regular">{year}</p>
                 </div>
                 
-                <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
-                  <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-                    {categories.map((category, index) => (
-                      <div key={index} className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full">
-                        <p className="font-display-regular leading-[28px] not-italic relative shrink-0 text-[#323e45] text-[18px] tracking-[0.027px]">
-                          {category}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+                <div className="flex flex-col">
+                  {categories.map((category, index) => (
+                    <p key={index} className="font-display-regular text-lg leading-7 text-stone-700">
+                      {category}
+                    </p>
+                  ))}
                 </div>
               </div>
 
-              <div className="content-stretch flex flex-col gap-[40px] items-start relative w-full lg:max-w-[720px]">
-                <div className="content-stretch flex flex-col gap-[32px] items-start relative w-full">
-                  <div className="font-display-regular leading-[0] not-italic relative shrink-0 text-[#323e45] text-[0px] tracking-[0.036px] w-full flex flex-col gap-[32px]">
-                    {paragraphs.map((paragraph, index) => (
-                      <p key={index} className="leading-[28px] text-[20px] md:text-[24px]">
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                </div>
+              <div className="flex flex-col gap-8 w-full lg:max-w-[720px]">
+                {paragraphs.map((paragraph, index) => (
+                  <p key={index} className="font-display-regular text-xl md:text-2xl leading-7 text-stone-700">
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </div>
 
             {/* Image Grid */}
-            <div 
-              className="w-full"
-              style={{ 
-                display: 'grid', 
-                gridTemplateColumns: '1fr',
-                gap: '32px'
-              }}
-            >
+            <div className="w-full">
               {!isSingleColumnProject && (
                 <style>{`
                   @media (min-width: 1024px) {
-                    .image-grid-container {
+                    .image-grid-modal {
                       grid-template-columns: 3fr 2fr !important;
                     }
-                    .image-grid-container > :nth-child(3) {
+                    .image-grid-modal > :nth-child(3) {
                       grid-column: 1 / -1;
                     }
                   }
                 `}</style>
               )}
-              <div 
-                className="image-grid-container w-full"
-                style={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: '1fr',
-                  gap: '32px'
-                }}
-              >
-                <motion.div 
-                  layoutId={`${projectId}-img-3`}
-                  transition={{
-                    layout: layoutType === 'spring' 
-                      ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
-                      : { duration: layoutDuration }
-                  }}
-                  className={`bg-stone-50 relative rounded-[8px] overflow-hidden ${isSingleColumnProject ? 'h-auto' : 'h-[320px] md:h-[420px] lg:h-[520px]'}`}
-                >
-                  <img 
-                    alt={img3.alt} 
-                    className={isSingleColumnProject ? 'w-full h-auto block' : 'h-full w-full'}
-                    // Constrain both axes so object-fit/object-position can take effect
-                    style={buildImgStyle(img3, 'contain')}
-                    src={img3.src} 
-                  />
-                  <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
-                </motion.div>
-                
-                <motion.div 
-                  layoutId={`${projectId}-img-2`}
-                  transition={{
-                    layout: layoutType === 'spring' 
-                      ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
-                      : { duration: layoutDuration }
-                  }}
-                  className={`bg-stone-50 relative rounded-[8px] overflow-hidden ${isSingleColumnProject ? 'h-auto' : 'h-[320px] md:h-[420px] lg:h-[520px]'}`}
-                >
-                  <img 
-                    alt={img2.alt} 
-                    className={isSingleColumnProject ? 'w-full h-auto block' : 'h-full w-full'}
-                    // Constrain both axes so object-fit/object-position can take effect
-                    style={buildImgStyle(img2, 'contain')}
-                    src={img2.src} 
-                  />
-                  <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
-                </motion.div>
-                
-                <motion.div 
-                  layoutId={`${projectId}-img-1`}
-                  transition={{
-                    layout: layoutType === 'spring' 
-                      ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
-                      : { duration: layoutDuration }
-                  }}
-                  className={`bg-stone-50 relative rounded-[8px] overflow-hidden ${isSingleColumnProject ? 'h-auto' : 'h-[320px] md:h-[420px] lg:h-[520px]'}`}
-                >
-                  <img 
-                    alt={img1.alt} 
-                    className={isSingleColumnProject ? 'w-full h-auto block' : 'h-full w-full'}
-                    // Constrain both axes so object-fit/object-position can take effect
-                    style={buildImgStyle(img1, 'contain')}
-                    src={img1.src} 
-                  />
-                  <div aria-hidden="true" className="absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" />
-                </motion.div>
+              <div className="image-grid-modal grid grid-cols-1 gap-8">
+                <ModalImage image={img3} projectId={projectId} index={2} isSingleColumn={isSingleColumnProject} layoutTransition={layoutTransition} />
+                <ModalImage image={img2} projectId={projectId} index={1} isSingleColumn={isSingleColumnProject} layoutTransition={layoutTransition} />
+                <ModalImage image={img1} projectId={projectId} index={0} isSingleColumn={isSingleColumnProject} layoutTransition={layoutTransition} />
               </div>
             </div>
           </div>

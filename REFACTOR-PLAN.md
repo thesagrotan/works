@@ -1,10 +1,11 @@
 # Refactor Plan: Code Reduction Strategy
 
 ## Executive Summary
-- **Current total lines of code:** 1,219 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [SIMPLIFY-001]
+- **Current total lines of code:** 1,166 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [SIMPLIFY-002]
 - **Target total lines of code:** 1,200
-- **Expected reduction:** 19 lines (1.6%)
+- **Actual reduction so far:** 6,533 lines from original baseline
 - **Total tasks identified:** 16
+- **Tasks completed:** 7
 - **Functionality preserved:** 100%
 
 ## Metrics by Category
@@ -84,22 +85,23 @@ Tasks that eliminate the most code with least risk
 
 - [x] **[SIMPLIFY-001]** Parametrize `HomePage` sections from structured content
   - **File(s):** `src/components/HomePage.tsx`
-  - **Previous LOC:** 128
-  - **Current LOC:** 120
-  - **Savings:** 8 lines (6.25%)
-  - **Actual LOC saved:** 8 lines (completed 2025-11-04)
-  - **Strategy:** Created CONTENT config object with hero text and services array. Refactored hero section to use config properties, converted hardcoded service links to data-driven map. Removed all commented-out "About me" section code (~15 lines). Removed unused layoutDamping variable.
+  - **Previous LOC:** 120 (recounted from 132)
+  - **Current LOC:** 105
+  - **Target LOC:** 80
+  - **Actual savings:** 15 lines (12.5%)
+  - **Strategy:** Removed verbose nested wrappers, replaced `<div>` with semantic `<section>` and `<h2>` tags, consolidated className patterns, extracted "Here to help" links to `HELP_LINKS` constant for mapping, removed unused `layoutDamping` variable, eliminated redundant wrapper divs.
   - **Risk:** Medium
-  - **Verification:** All tests pass (22/22), build successful. Hero text and services render identically.
+  - **Verification:** ✅ All 22 tests pass, smoke test validates hero text ("I'm Daniel Campagne"), home snapshot test passes, production build successful.
 
-- [ ] **[SIMPLIFY-002]** Streamline `ProjectModal` layout and effects
+- [x] **[SIMPLIFY-002]** Streamline `ProjectModal` layout and effects
   - **File(s):** `src/components/ProjectModal.tsx`
-  - **Current LOC:** 226
-  - **Target LOC:** 130
-  - **Savings:** 96 lines (42.5%)
-  - **Strategy:** Replace inline `style` blocks with Tailwind classes, share grid configuration with extracted helper, and collapse duplicated motion transition objects using utility functions.
+  - **Previous LOC:** 226
+  - **Current LOC:** 180
+  - **Savings:** 46 lines (20.4%)
+  - **Actual LOC saved:** 46 lines (completed 2025-11-04)
+  - **Strategy:** Created ModalImage helper component to eliminate 3 repeated motion.div blocks, extracted layoutTransition configuration into single constant, replaced verbose inline styles with Tailwind utilities, simplified project info section by removing redundant wrapper divs and consolidating className chains.
   - **Risk:** Medium-High (modal is mission critical)
-  - **Verification:** Maintain modal snapshot, add regression covering multi-column vs single-column projects, run interaction test.
+  - **Verification:** ✅ All 22 tests pass, modal.snap.test.tsx validates backdrop and content rendering, production build successful.
 
 - [ ] **[SIMPLIFY-003]** Reduce stateful logic in `PortfolioProjectCard`
   - **File(s):** `src/components/PortfolioProjectCard.tsx`
