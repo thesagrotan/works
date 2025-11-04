@@ -13,6 +13,23 @@
       <meta name="theme-color" content="#edefeb">
       <meta name="robots" content="noindex, nofollow">
 
+          <script>
+            // If this file is served on GitHub Pages (project site), redirect to the built site.
+            (function () {
+              var isGithubPages = /\.github\.io$/i.test(location.hostname);
+              // Avoid redirect during local development and preview servers
+              var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+              if (isGithubPages && !isLocal) {
+                // For project pages like https://<user>.github.io/<repo>/,
+                // redirect to the built output under /<repo>/build/
+                var target = (location.pathname.endsWith('/') ? location.pathname : location.pathname + '/') + 'build/';
+                // Preserve hash/query if present
+                var newUrl = target + location.search + location.hash;
+                location.replace(newUrl);
+              }
+            })();
+          </script>
+
     </head>
 
     <body>
