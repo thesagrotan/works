@@ -46,7 +46,11 @@ export default function PortfolioProjectCard({
       <div className="content-stretch flex gap-[64px] items-end relative shrink-0 w-full">
         <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-[144px]">
           <div className="h-[20px] relative shrink-0 w-[107px] mt-[-44px]">
-            {project.logo ? (
+            {project.logoText ? (
+              <span className="block h-[20px] leading-[20px] text-[16px] font-semibold text-[#323e45] truncate">
+                {project.logoText}
+              </span>
+            ) : project.logo ? (
               <img
                 src={project.logo}
                 alt={`${project.title} logo`}

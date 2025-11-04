@@ -33,6 +33,8 @@ export interface Project {
   longDescription: string;
   // Optional per-project brand/logo asset shown in cards
   logo?: string;
+  // Optional text to show instead of a logo image in cards
+  logoText?: string;
   images: {
     card: [ProjectImage, ProjectImage, ProjectImage];
     detail: [ProjectImage, ProjectImage, ProjectImage];

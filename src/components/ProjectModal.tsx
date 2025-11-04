@@ -42,6 +42,7 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
   
   const { title, year, categories, longDescription, images } = project;
   const [img1, img2, img3] = images.detail;
+  const isSingleColumnProject = projectId === 'healthtech-dashboard';
   
   // Split longDescription by double newlines to create paragraphs, filter out empty ones
   const paragraphs = longDescription.split('\n\n').filter(p => p.trim().length > 0);
@@ -139,16 +140,18 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                 gap: '32px'
               }}
             >
-              <style>{`
-                @media (min-width: 1024px) {
-                  .image-grid-container {
-                    grid-template-columns: 3fr 2fr !important;
+              {!isSingleColumnProject && (
+                <style>{`
+                  @media (min-width: 1024px) {
+                    .image-grid-container {
+                      grid-template-columns: 3fr 2fr !important;
+                    }
+                    .image-grid-container > :nth-child(3) {
+                      grid-column: 1 / -1;
+                    }
                   }
-                  .image-grid-container > :nth-child(3) {
-                    grid-column: 1 / -1;
-                  }
-                }
-              `}</style>
+                `}</style>
+              )}
               <div 
                 className="image-grid-container w-full"
                 style={{ 
@@ -164,11 +167,11 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                       ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
                       : { duration: layoutDuration }
                   }}
-                  className="bg-stone-50 relative rounded-[8px] overflow-hidden h-[320px] md:h-[420px] lg:h-[520px]"
+                  className={`bg-stone-50 relative rounded-[8px] overflow-hidden ${isSingleColumnProject ? 'h-auto' : 'h-[320px] md:h-[420px] lg:h-[520px]'}`}
                 >
                   <img 
                     alt={img3.alt} 
-                    className="h-full w-full"
+                    className={isSingleColumnProject ? 'w-full h-auto block' : 'h-full w-full'}
                     // Constrain both axes so object-fit/object-position can take effect
                     style={buildImgStyle(img3, 'contain')}
                     src={img3.src} 
@@ -183,11 +186,11 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                       ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
                       : { duration: layoutDuration }
                   }}
-                  className="bg-stone-50 relative rounded-[8px] overflow-hidden h-[320px] md:h-[420px] lg:h-[520px]"
+                  className={`bg-stone-50 relative rounded-[8px] overflow-hidden ${isSingleColumnProject ? 'h-auto' : 'h-[320px] md:h-[420px] lg:h-[520px]'}`}
                 >
                   <img 
                     alt={img2.alt} 
-                    className="h-full w-full"
+                    className={isSingleColumnProject ? 'w-full h-auto block' : 'h-full w-full'}
                     // Constrain both axes so object-fit/object-position can take effect
                     style={buildImgStyle(img2, 'contain')}
                     src={img2.src} 
@@ -202,11 +205,11 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
                       ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
                       : { duration: layoutDuration }
                   }}
-                  className="bg-stone-50 relative rounded-[8px] overflow-hidden h-[320px] md:h-[420px] lg:h-[520px]"
+                  className={`bg-stone-50 relative rounded-[8px] overflow-hidden ${isSingleColumnProject ? 'h-auto' : 'h-[320px] md:h-[420px] lg:h-[520px]'}`}
                 >
                   <img 
                     alt={img1.alt} 
-                    className="h-full w-full"
+                    className={isSingleColumnProject ? 'w-full h-auto block' : 'h-full w-full'}
                     // Constrain both axes so object-fit/object-position can take effect
                     style={buildImgStyle(img1, 'contain')}
                     src={img1.src} 
