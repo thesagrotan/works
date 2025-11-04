@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import svgPaths from '../imports/svg-navigation-paths';
 import { useAnimationControls } from './AnimationControls';
 import { getProjectById } from '../data/projects';
 import { getModalVariants } from '../animation/modalVariants';

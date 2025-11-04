@@ -1,11 +1,11 @@
 # Refactor Plan: Code Reduction Strategy
 
 ## Executive Summary
-- **Current total lines of code:** 979 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [PRUNE-001]
+- **Current total lines of code:** 975 (TS/TSX across components, hooks, utils) — recounted 2025-11-04 after [PRUNE-003]
 - **Target total lines of code:** 1,200
-- **Actual reduction so far:** 8,356 lines from original baseline
+- **Actual reduction so far:** 8,360 lines from original baseline
 - **Total tasks identified:** 16
-- **Tasks completed:** 12
+- **Tasks completed:** 13
 - **Functionality preserved:** 100%
 
 ## Metrics by Category
@@ -176,14 +176,16 @@ Tasks that eliminate the most code with least risk
   - **Risk:** Low
   - **Verification:** Type-check confirms no imports.
 
-- [ ] **[PRUNE-003]** Trim unused SVG data exports
-  - **File(s):** `src/imports/svg-hero-paths.ts`, `src/imports/svg-navigation-paths.ts`
-  - **Current LOC:** 50 + 3 = 53
-  - **Target LOC:** 30
-  - **Savings:** 23 lines (43.4%)
-  - **Strategy:** Remove unused path constants after consolidations, ensure only referenced keys remain, document the mapping for future updates.
+- [x] **[PRUNE-003]** Trim unused SVG data exports (PARTIAL)
+  - **File(s):** `src/imports/svg-hero-paths.ts`, `src/imports/svg-navigation-paths.ts`, `src/components/ProjectModal.tsx`
+  - **Previous LOC:** 50 + 3 + 181 = 234
+  - **Current LOC:** 50 + 0 + 180 = 230  
+  - **Savings:** 4 lines (1.7%)
+  - **Actual LOC saved:** 4 lines (completed 2025-11-04)
+  - **Strategy:** Removed unused svgPaths import from ProjectModal.tsx, deleted unused svg-navigation-paths.ts file (which was only imported by orphaned DesktopProjectPage). Cannot remove svg-hero-paths exports yet because they're referenced by orphaned files from incomplete [REDUCE-002] (DesktopHomePage.tsx, DesktopProjectPage.tsx, TechnologyLogosCarousel.tsx still exist but are never imported).
   - **Risk:** Low
-  - **Verification:** Lint to spot unused exports, smoke test hero + modal icons.
+  - **Verification:** ✅ All 22 tests pass, production build successful (649.36 kB JS, 28.80 kB CSS)
+  - **Note:** To achieve the full 23-line target, [REDUCE-002] must first be completed properly by deleting the orphaned Desktop*/Technology files, then unused svg-hero-paths exports can be safely removed.
 
 ## Testing Strategy
 - [ ] **[TEST-001]** Verify functionality preservation
