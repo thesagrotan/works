@@ -22,7 +22,7 @@
               if (isGithubPages && !isLocal) {
                 // For project pages like https://<user>.github.io/<repo>/,
                 // redirect to the built output under /<repo>/build/
-                var target = (location.pathname.endsWith('/') ? location.pathname : location.pathname + '/') + 'build/';
+                var target = (location.pathname.endsWith('/') ? location.pathname : location.pathname + '/') + 'src/';
                 // Preserve hash/query if present
                 var newUrl = target + location.search + location.hash;
                 location.replace(newUrl);
