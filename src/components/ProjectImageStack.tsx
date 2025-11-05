@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { useState, useCallback } from 'react';
 import { buildImgStyle } from '../lib/imageStyle';
+import { DIMENSIONS, CLASSES } from '../config/tokens';
 import type { ProjectImage } from '../data/projects';
 
 interface AnimationConfig {
@@ -15,23 +16,6 @@ interface ProjectImageStackProps {
   className?: string;
 }
 
-// Card layout configuration constants
-const CARD_BASE_WIDTH = 285;
-const CARD_MAX_HEIGHT = 186;
-
-// Shared shadow style between card and modal views
-const shadowStyle = "shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]";
-
-// Card view rotation angles
-const cardRotations = ['rotate-[4deg]', 'rotate-[2deg]', ''];
-
-// Card view margins
-const cardMargins: Record<number, string> = {
-  1: 'ml-[48px] mt-2',
-  2: 'ml-[24px] mt-[32px]',
-  3: 'ml-0 mt-[56px]'
-};
-
 export default function ProjectImageStack({ 
   images, 
   projectId, 
@@ -39,7 +23,9 @@ export default function ProjectImageStack({
   className = ''
 }: ProjectImageStackProps) {
   // For maintaining aspect ratios in card view
-  const [ratios, setRatios] = useState<number[]>(Array(3).fill(CARD_BASE_WIDTH / CARD_MAX_HEIGHT));
+  const [ratios, setRatios] = useState<number[]>(
+    Array(3).fill(DIMENSIONS.card.baseWidth / DIMENSIONS.card.maxHeight)
+  );
   
   const handleLoad = useCallback((index: number) => (e: React.SyntheticEvent<HTMLImageElement>) => {
     const el = e.currentTarget;
@@ -62,16 +48,16 @@ export default function ProjectImageStack({
         <motion.div
           key={index}
           layoutId={`${projectId}-img-${index + 1}`}
-          className={`[grid-area:1_/_1] bg-stone-50 relative rounded-[8px] overflow-hidden ${cardRotations[index]} ${cardMargins[index + 1]}`}
+          className={`[grid-area:1_/_1] bg-stone-50 relative rounded-[8px] overflow-hidden ${CLASSES.cardRotation[index]} ${CLASSES.cardMargins[index + 1 as 1 | 2 | 3]}`}
           whileHover={{ scale: animation.hover.scale }}
           transition={{
             scale: { duration: animation.hover.duration },
             layout: layoutTransition
           }}
           style={{
-            width: CARD_BASE_WIDTH,
-            height: Math.min(CARD_BASE_WIDTH / ratios[index], CARD_MAX_HEIGHT),
-            maxHeight: CARD_MAX_HEIGHT
+            width: DIMENSIONS.card.baseWidth,
+            height: Math.min(DIMENSIONS.card.baseWidth / ratios[index], DIMENSIONS.card.maxHeight),
+            maxHeight: DIMENSIONS.card.maxHeight
           }}
         >
           <img
@@ -83,7 +69,7 @@ export default function ProjectImageStack({
           />
           <div 
             aria-hidden="true" 
-            className={`absolute border border-[#323e45] border-solid inset-0 pointer-events-none rounded-[8px] ${shadowStyle}`} 
+            className={`absolute ${CLASSES.cardBorder} inset-0 pointer-events-none ${CLASSES.cardShadow}`} 
           />
         </motion.div>
       ))}

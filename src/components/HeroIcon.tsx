@@ -1,11 +1,11 @@
 import { motion, type MotionProps } from 'motion/react';
-import svgPaths from '../imports/svg-hero-paths';
+import { heroIconPaths, type HeroIconName } from '../lib/svgLoader';
 
 /**
  * Valid hero icon names that can be used with the HeroIcon component.
  * These are the keys from the svgPaths object.
  */
-export type HeroIconName = keyof typeof svgPaths;
+export type { HeroIconName };
 
 /**
  * Props for the HeroIcon component
@@ -45,10 +45,10 @@ export function HeroIcon({
   size = 32,
   width,
   height,
-  viewBox = "0 0 32 32",
+  viewBox = "0 0 48 48",
   ...motionProps
 }: HeroIconProps) {
-  const path = svgPaths[name];
+  const path = heroIconPaths[name];
   if (!path) return null;
 
   return (

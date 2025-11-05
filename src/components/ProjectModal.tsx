@@ -41,7 +41,7 @@ const ModalImage = ({
     />
     <div 
       aria-hidden="true" 
-      className="absolute border border-stone-800 inset-0 pointer-events-none rounded-lg shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" 
+      className="absolute border border-[#323e45] inset-0 pointer-events-none rounded-lg shadow-[41px_57px_20px_0px_rgba(47,62,70,0),26px_37px_18px_0px_rgba(47,62,70,0.01),15px_21px_15px_0px_rgba(47,62,70,0.05),7px_9px_11px_0px_rgba(47,62,70,0.09),2px_2px_6px_0px_rgba(47,62,70,0.1)]" 
     />
   </motion.div>
 );
