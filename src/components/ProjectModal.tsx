@@ -86,7 +86,7 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
   
   const { title, year, categories, longDescription, images } = project;
   const [img1, img2, img3] = images.detail;
-  const isSingleColumnProject = projectId === 'healthtech-dashboard';
+  const isSingleColumnProject = projectId === 'brand-identities'; // Example condition for single column layout
   const layoutTransition = layoutType === 'spring' 
     ? { type: 'spring', damping: layoutDamping, stiffness: layoutStiffness }
     : { duration: layoutDuration };
