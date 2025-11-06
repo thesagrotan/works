@@ -24,7 +24,7 @@ export default function PortfolioProjectCard({ project, onClick, animation }: Po
   const { id, categories, images } = project;
   
   return (
-    <button onClick={() => onClick(id)} className="block group w-full text-left cursor-pointer border border-[#323e45] rounded-[8px] p-4 mt-[-44px]">
+    <button onClick={() => onClick(id)} className="focus:outline-none focus:ring-0 block group w-full text-left cursor-pointer border border-[#323e45] rounded-[8px] p-4 mt-[-44px]">
       <div className="flex gap-16 items-end w-full">
         <div className={`flex flex-col gap-6 ${CLASSES.categoryColumn}`}>
           <div className={`${CLASSES.logoSize} mt-[-44px]`}><ProjectLogo project={project} /></div>

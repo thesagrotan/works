@@ -3,6 +3,8 @@
     {
       "id": "credcore",
       "title": "CredCore",
+       "logo": "/public/images/credcore.svg",
+
       "year": "2023-2025",
       "categories": ["UX/UI Design", "Design Systems", "Framer"],
       "longDescription": "CredCore is an AI-powered fintech platform transforming how enterprises manage complex debt agreements.\n\nThrough iterative exploration, I designed and tested new ways to organize and visualize intricate financial data. In parallel, I built and maintained the platform's marketing website in Framer, ensuring design fidelity and high performance. I also created a unified design system that integrates shadcn/ui, bridging design and engineering under a refreshed brand while establishing consistent patterns across all product touchpoints.",
@@ -40,19 +42,19 @@
       "longDescription": "Queue helps you establish expert authority by providing precise responses to questions from high-intent audiences.\n\n This redesign improves usability with a streamlined, user-friendly interface and introduces a distinctive ranking meter that creates a consistent and recognizable signature across the company’s tools.",
       "images": [
         {
-          "src": "/public/images/Q3.jpg",
+          "src": "/public/images/Q3.avif",
           "alt": "Urban Mobility Project Screenshot 1",
           "card": { "objectPosition": "right top" },
           "detail": { "objectPosition": "left top" }
         },
         {
-          "src": "/public/images/Q2.jpg",
+          "src": "/public/images/Q2.avif",
           "alt": "Urban Mobility Project Screenshot 2",
           "card": { "objectPosition": "right top" },
           "detail": { "objectPosition": "left top" }
         },
         {
-          "src": "/public/images/Q1.jpg",
+          "src": "/public/images/Q1.avif",
           "alt": "Urban Mobility Project Screenshot 3",
           "card": { "objectPosition": "left top" },
           "detail": { "objectPosition": "left top" }
@@ -67,19 +69,19 @@
       "longDescription": "Brand work for different companies.",
       "images": [
         {
-          "src": "/public/images/Empact.jpg",
+          "src": "/public/images/Empact.avif",
           "alt": "HealthSync Project Screenshot 1",
           "card": {},
           "detail": {}
         },
         {
-          "src": "/public/images/Uto.jpg",
+          "src": "/public/images/Uto.avif",
           "alt": "HealthSync Project Screenshot 2",
           "card": {},
           "detail": {}
         },
         {
-          "src": "/public/images/Neurobrave.jpg",
+          "src": "/public/images/Neurobrave.avif",
           "alt": "HealthSync Project Screenshot 3",
           "card": {},
           "detail": {}
