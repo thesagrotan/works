@@ -99,4 +99,9 @@
 
 html {
   font-size: var(--font-size);
+  overflow-y: scroll;
+}
+
+body {
+  overflow-x: hidden;
 }

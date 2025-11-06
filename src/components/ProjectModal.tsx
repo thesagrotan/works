@@ -107,10 +107,10 @@ export default function ProjectModal({ projectId, onClose }: ProjectModalProps) 
       <motion.div
         {...getModalVariants(modalAppearanceEffect, modalScaleFrom, modalRotateFrom)}
         transition={{ type: 'spring', damping: modalDamping, stiffness: modalStiffness }}
-        className="fixed inset-0 z-50 overflow-y-auto"
-        style={{ transformOrigin: 'center center' }}
+        className="fixed inset-0 z-50 overflow-y-auto overscroll-contain"
+        style={{ transformOrigin: 'center center', WebkitOverflowScrolling: 'touch' }}
       >
-        <div className="bg-[#edefeb] min-h-screen w-full">
+        <div className="bg-[#edefeb] min-h-full w-full">
           <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-16">
             {/* Back button and Chat button */}
             <div className="flex justify-between items-center mb-16">
