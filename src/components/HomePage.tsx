@@ -29,7 +29,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
       <div className={`${CLASSES.pageBg} min-h-screen w-full overflow-x-hidden`}>
       <div className={CLASSES.container}>
         {/* Hero Section */}
-        <section className="flex flex-col items-center gap-16 mb-24 py-8 md:py-24">
+        <section className="flex flex-col items-center gap-16 py-8 md:py-24">
           <BrandLogo />
           <div className={`${CLASSES.textBlock} flex flex-col gap-12`}>
             <div className="flex flex-col gap-8 text-primary text-xs md:text-xl tracking-sm leading-none">
@@ -44,7 +44,7 @@ export default function HomePage({ onProjectClick }: HomePageProps) {
             <motion.a
               href={`mailto:${siteContent.hero.email}`}
               aria-label="Email Daniel"
-              className={`${CLASSES.buttonBg} flex ${CLASSES.button} rounded-lg ${SHADOWS.button} cursor-pointer`}
+              className={`${CLASSES.buttonBg} inline-flex self-start ${CLASSES.button} rounded-lg ${SHADOWS.button} cursor-pointer`}
               whileHover={{ scale: buttonHoverScale, backgroundColor: COLORS.buttonHover }}
               transition={{ duration: buttonHoverDuration }}
             >
